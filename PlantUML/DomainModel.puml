@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+object RoboRally_Game {
+    Timer
+}
+
+object Player {
+    Energy Cube
+    Register
+    CheckPointToken
+}
+
+object Robot {
+    Laser
+}
+
+object Board {
+    Elements
+}
+
+object Programming_Card {
+
+}
+
+object Special_Programming_Card {
+
+}
+
+object Damage_Card {
+
+}
+
+object Upgrade_Card {
+
+}
+
+object Upgrade_Shop {
+
+}
+
+object Space {
+
+}
+
+
+RoboRally_Game -- Player
+RoboRally_Game -- Board
+Board *--Space
+Space -- Robot
+Player -- Robot
+RoboRally_Game --- Programming_Card
+RoboRally_Game --- Special_Programming_Card
+RoboRally_Game --- Damage_Card
+RoboRally_Game -- Upgrade_Card
+RoboRally_Game -- Upgrade_Shop
+
+@enduml
