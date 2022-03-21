@@ -6,9 +6,12 @@ object RoboRally_Game {
 }
 
 object Player {
-    Energy Cube
-    Register
+    EnergyCube
     CheckPointToken
+}
+
+object Register {
+
 }
 
 object Robot {
@@ -16,7 +19,7 @@ object Robot {
 }
 
 object Board {
-    Elements
+    RacingCourse
 }
 
 object Programming_Card {
@@ -40,19 +43,46 @@ object Upgrade_Shop {
 }
 
 object Space {
+    Elements
+}
+
+abstract Card {
 
 }
 
+object UpgradePhase {
 
-RoboRally_Game -- Player
-RoboRally_Game -- Board
-Board *--Space
-Space -- Robot
-Player -- Robot
-RoboRally_Game --- Programming_Card
-RoboRally_Game --- Special_Programming_Card
-RoboRally_Game --- Damage_Card
-RoboRally_Game -- Upgrade_Card
-RoboRally_Game -- Upgrade_Shop
+}
+
+object ProgrammingPhase {
+
+}
+
+object ActivationPhase {
+
+}
+
+object GameRound {
+}
+
+RoboRally_Game"1" -- "2..6"Player : plays
+RoboRally_Game"1" *-R- "*"GameRound
+GameRound"1" -R- "1"UpgradePhase : has
+GameRound"1" -R- "1"ProgrammingPhase : has
+GameRound"1" -R- "1"ActivationPhase : has
+UpgradePhase <. ProgrammingPhase
+ProgrammingPhase <. ActivationPhase
+RoboRally_Game"1"-- "1"Board : has
+Board"1" *-- "1..*"Space : has
+Space"1" - "0..1"Robot : has
+Player"1" -L- "1"Robot : has
+UpgradePhase"1" -- "1"Upgrade_Card : has
+UpgradePhase"1" -- "1"Upgrade_Shop : has
+Player"1" -- "5"Register : has
+RoboRally_Game"1" --- "1..*"Card : has
+Card <|--- Programming_Card
+Card <|--- Damage_Card
+Card <|--- Special_Programming_Card
+Card"0..1" -- "1"Register : has
 
 @enduml
