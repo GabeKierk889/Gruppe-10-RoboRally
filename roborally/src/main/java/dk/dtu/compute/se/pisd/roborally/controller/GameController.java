@@ -155,13 +155,20 @@ public class GameController {
                     if (command.isInteractive()) {
                         board.setPhase(Phase.PLAYER_INTERACTION);
                         return;
-                    } else
+                    } else {
                         executeCommand(currentPlayer, command);
+                    }
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 if (nextPlayerNumber < board.getPlayersNumber()) {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
+                    // this is the end of a register
+                    // at the end of a register, check if any player gets a checkpoint token
+                    for (int i = 0; i < board.getPlayersNumber(); i++)
+                        board.getPlayer(i).getSpace().giveTokenIfOnEndOnCheckpoint();
+                    // check if any player has won the game
+                    checkForWinner();
                     step++;
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
@@ -190,6 +197,12 @@ public class GameController {
         if (nextPlayerNumber < board.getPlayersNumber()) {
             board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
         } else {
+            // this is the end of a register
+            // at the end of a register, check if any player gets a checkpoint token
+            for (int i = 0; i < board.getPlayersNumber(); i++)
+                board.getPlayer(i).getSpace().giveTokenIfOnEndOnCheckpoint();
+            // check if any player has won the game
+            checkForWinner();
             step++;
             if (step < Player.NO_REGISTERS) {
                 makeProgramFieldsVisible(step);
@@ -227,8 +240,6 @@ public class GameController {
                 default:
                     // DO NOTHING (for now)
             }
-            // after each command/ move by any player, check if any player has won the game
-            checkForWinner();
         }
     }
 
