@@ -64,14 +64,6 @@ public class Space extends Subject {
             }
             if (player != null) {
                 player.setSpace(this);
-                if (checkPointToken != null) { // if this space is a checkpoint,
-                // we need to check if a player should get a checkpoint token and updates their token number
-                    if ((player.getCheckPointToken() != null &&
-                        checkPointToken.getTokenNumber() - player.getCheckPointToken().getTokenNumber() == 1)
-                        || (player.getCheckPointToken() == null && checkPointToken.getTokenNumber() == 1)) {
-                        player.setCheckPointToken(checkPointToken.getTokenNumber());
-                    }
-                }
             }
             notifyChange();
         }
@@ -90,5 +82,16 @@ public class Space extends Subject {
 
     public void setCheckPointToken(int tokenNumber) {
         checkPointToken = new CheckPointToken(tokenNumber);
+    }
+
+    public void giveTokenIfOnEndOnCheckpoint() {
+        if (checkPointToken != null) { // if this space is a checkpoint,
+            // we need to check if a player should get a checkpoint token and updates their token number
+            if ((player.getCheckPointToken() != null &&
+                    checkPointToken.getTokenNumber() - player.getCheckPointToken().getTokenNumber() == 1)
+                    || (player.getCheckPointToken() == null && checkPointToken.getTokenNumber() == 1)) {
+                player.setCheckPointToken(checkPointToken.getTokenNumber());
+            }
+        }
     }
 }
