@@ -240,11 +240,25 @@ public class GameController {
             Heading heading = player.getHeading();
             Space target = board.getNeighbour(space, heading);
             if (target != null) {
-                // XXX note that this removes an other player from the space, when there
-                //     is another player on the target. Eventually, this needs to be
-                //     implemented in a way so that other players are pushed away!
+                Player oldPlayer = target.getPlayer();
+                if (oldPlayer != null) {
+                    Space pushTarget = board.getNeighbour(target, heading);
+                    pushPlayer(oldPlayer, pushTarget);
+                }
                 target.setPlayer(player);
             }
+        }
+    }
+
+    public void pushPlayer (@NotNull Player pushedPlayer, @NotNull Space pushTarget) {
+        if (pushTarget != null) {
+            Player oldPlayer = pushTarget.getPlayer();
+            if (oldPlayer != null) {
+                Heading heading = pushedPlayer.getHeading();
+                Space nextTarget = board.getNeighbour(pushTarget, heading);
+                pushPlayer(oldPlayer,nextTarget);
+            }
+            pushTarget.setPlayer(pushedPlayer);
         }
     }
 
