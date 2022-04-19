@@ -48,6 +48,8 @@ public class Player extends Subject {
     private CommandCardField[] program;
     private CommandCardField[] cards;
 
+    private CheckPointToken checkPointToken;
+
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;
         this.name = name;
@@ -64,6 +66,8 @@ public class Player extends Subject {
         for (int i = 0; i < cards.length; i++) {
             cards[i] = new CommandCardField(this);
         }
+
+        checkPointToken = null;
     }
 
     public String getName() {
@@ -133,4 +137,11 @@ public class Player extends Subject {
         return cards[i];
     }
 
+    public CheckPointToken getCheckPointToken() {
+        return checkPointToken;
+    }
+
+    public void setCheckPointToken(int tokenNumber) {
+        checkPointToken = new CheckPointToken(tokenNumber);
+    }
 }

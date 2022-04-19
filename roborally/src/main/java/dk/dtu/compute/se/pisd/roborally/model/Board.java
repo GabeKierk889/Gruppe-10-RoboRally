@@ -68,6 +68,9 @@ public class Board extends Subject {
                 spaces[x][y] = space;
             }
         }
+        // set up the spaces which have checkpoint tokens on them
+        spaces[7][5].setCheckPointToken(1);
+        spaces[0][0].setCheckPointToken(2);
         this.stepMode = false;
     }
 
@@ -205,11 +208,21 @@ public class Board extends Subject {
         // the students, this method gives a string representation of the current
         // status of the game
 
-        // XXX: V2 changed the status so that it shows the phase, the player and the step
+        int checkpoint = getCurrentPlayer().getCheckPointToken() == null ? 0 : getCurrentPlayer().getCheckPointToken().getTokenNumber();
         return "Phase: " + getPhase().name() +
                 ", Player = " + getCurrentPlayer().getName() +
-                ", Step: " + getStep();
+                ", Step: " + getStep() +
+                ", CheckPoints collected: " + checkpoint;
     }
 
-
+    public int getMaxTokenNumber() {
+        int max = 0;
+        for (Space[] spaceArray : spaces) {
+            for (int i = 0; i < spaceArray.length; i++) {
+                if (spaceArray[i].getCheckPointToken() != null)
+                    max = Math.max(max, spaceArray[i].getCheckPointToken().getTokenNumber());
+            }
+        }
+        return max;
+    }
 }
