@@ -23,6 +23,9 @@ package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ...
  *
@@ -30,6 +33,8 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
  *
  */
 public class Space extends Subject {
+
+    private List<Heading> walls = new ArrayList<>();
 
     public final Board board;
 
@@ -70,6 +75,13 @@ public class Space extends Subject {
         // also need to update when some player attributes change, the player can
         // notify the space of these changes by calling this method.
         notifyChange();
+    }
+
+    public void setWalls(Heading heading){
+        this.walls.add(heading);
+    }
+    public List<Heading> getWalls() {
+        return walls;
     }
 
 }
