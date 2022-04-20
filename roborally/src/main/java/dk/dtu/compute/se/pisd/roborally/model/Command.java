@@ -34,14 +34,18 @@ import java.util.List;
 public enum Command {
 
     // This is a very simplistic way of realizing different commands.
-
     FORWARD("Fwd"),
+    BACKWARD("Bwd"),
     RIGHT("Turn Right"),
     LEFT("Turn Left"),
     FAST_FORWARD("Fast Fwd"),
+    U_TURN("U-turn"),
+    SPEED_ROUTINE("Fwd 3x"),
 
     // XXX Assignment P3
-    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT);
+    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
+    OPTION_WEASEL_ROUTINE("Left, Right OR U-Turn", LEFT, RIGHT, U_TURN),
+    OPTION_SANDBOX_ROUTINE("Move 1/2/3, Backup, Left, Right, U-Turn", FORWARD, FAST_FORWARD, SPEED_ROUTINE, LEFT, RIGHT, U_TURN);
 
     final public String displayName;
 

@@ -237,6 +237,15 @@ public class GameController {
                 case FAST_FORWARD:
                     this.fastForward(player);
                     break;
+                case U_TURN:
+                    this.uTurn(player);
+                    break;
+                case SPEED_ROUTINE:
+                    this.speedRoutine(player);
+                    break;
+                case BACKWARD:
+                    this.moveBackward(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
@@ -249,6 +258,22 @@ public class GameController {
         Space space = player.getSpace();
         if (player != null && player.board == board && space != null) {
             Heading heading = player.getHeading();
+            Space target = board.getNeighbour(space, heading);
+            if (target != null) {
+                Player oldPlayer = target.getPlayer();
+                if (oldPlayer != null) {
+                    Space pushTarget = board.getNeighbour(target, heading);
+                    pushPlayer(oldPlayer, pushTarget);
+                }
+                target.setPlayer(player);
+            }
+        }
+    }
+
+    public void moveBackward(@NotNull Player player) {
+        Space space = player.getSpace();
+        if (player != null && player.board == board && space != null) {
+            Heading heading = player.getHeading1();
             Space target = board.getNeighbour(space, heading);
             if (target != null) {
                 Player oldPlayer = target.getPlayer();
@@ -292,6 +317,22 @@ public class GameController {
             player.setHeading(player.getHeading().prev());
         }
     }
+
+    public void uTurn(@NotNull Player player) {
+        if(player != null && player.board == board) {
+            turnRight(player);
+            turnRight(player);
+        }
+    }
+
+    public void speedRoutine(Player player) {
+        if(player != null && player.board == board) {
+            moveForward(player);
+            moveForward(player);
+            moveForward(player);
+        }
+    }
+
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();

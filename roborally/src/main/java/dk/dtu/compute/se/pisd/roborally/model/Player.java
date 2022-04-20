@@ -25,6 +25,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.SOUTH;
+import static dk.dtu.compute.se.pisd.roborally.model.Heading.NORTH;
 
 /**
  * ...
@@ -44,6 +45,7 @@ public class Player extends Subject {
 
     private Space space;
     private Heading heading = SOUTH;
+    private Heading heading1 = NORTH;
 
     private CommandCardField[] program;
     private CommandCardField[] cards;
@@ -117,6 +119,10 @@ public class Player extends Subject {
 
     public Heading getHeading() {
         return heading;
+    }
+
+    public Heading getHeading1() {
+        return heading1;
     }
 
     public void setHeading(@NotNull Heading heading) {
