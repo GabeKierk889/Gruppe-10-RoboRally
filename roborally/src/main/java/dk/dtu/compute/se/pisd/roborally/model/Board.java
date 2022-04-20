@@ -42,6 +42,7 @@ public class Board extends Subject {
     public final int height;
 
     public final String boardName;
+    int x;
 
     private Integer gameId;
 
