@@ -127,6 +127,8 @@ public class Board extends Subject {
         spaces[2][6].setWalls(Heading.EAST);
         spaces[7][3].setWalls(Heading.SOUTH);
     }
+
+
     public Integer getGameId() {
         return gameId;
     }
