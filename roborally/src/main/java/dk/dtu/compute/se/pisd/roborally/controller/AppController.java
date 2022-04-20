@@ -41,7 +41,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * ...
+ * The AppController is responsible for handling  implementation logic
+ * about the App such as start,load,save,exit the gameApp.
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *
@@ -59,6 +60,9 @@ public class AppController implements Observer {
         this.roboRally = roboRally;
     }
 
+    /**
+     * this methode allows the player to start the new game
+     */
     public void newGame() {
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
         dialog.setTitle("Player number");
@@ -93,10 +97,16 @@ public class AppController implements Observer {
         }
     }
 
+    /**
+     * this methode should provide the player to save the game
+     */
     public void saveGame() {
         // XXX needs to be implemented eventually
     }
 
+    /**
+     * this methode should provide the player to load the game
+     */
     public void loadGame() {
         // XXX needs to be implememted eventually
         // for now, we just create a new game
@@ -127,6 +137,9 @@ public class AppController implements Observer {
         return false;
     }
 
+    /**
+     * this methode should provide the player to close the app
+     */
     public void exit() {
         if (gameController != null) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -146,6 +159,10 @@ public class AppController implements Observer {
         }
     }
 
+    /**
+     * this methode checks if the game is running
+     * @return the gameController of the running game ,otherwise return the false
+     */
     public boolean isGameRunning() {
         return gameController != null;
     }

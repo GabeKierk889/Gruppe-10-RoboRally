@@ -69,10 +69,61 @@ public class Board extends Subject {
                 spaces[x][y] = space;
             }
         }
+
+        setBoardWall();
+        setObstcle();
+
         // set up the spaces which have checkpoint tokens on them
         spaces[7][5].setCheckPointToken(1);
         spaces[0][0].setCheckPointToken(2);
         this.stepMode = false;
+    }
+
+    private void setBoardWall(){
+
+        spaces[0][0].setWalls(Heading.NORTH);
+        spaces[1][0].setWalls(Heading.NORTH);
+        spaces[2][0].setWalls(Heading.NORTH);
+        spaces[3][0].setWalls(Heading.NORTH);
+        spaces[4][0].setWalls(Heading.NORTH);
+        spaces[5][0].setWalls(Heading.NORTH);
+        spaces[6][0].setWalls(Heading.NORTH);
+        spaces[7][0].setWalls(Heading.NORTH);
+
+        spaces[0][0].setWalls(Heading.WEST);
+        spaces[0][1].setWalls(Heading.WEST);
+        spaces[0][2].setWalls(Heading.WEST);
+        spaces[0][3].setWalls(Heading.WEST);
+        spaces[0][4].setWalls(Heading.WEST);
+        spaces[0][5].setWalls(Heading.WEST);
+        //spaces[0][6].setWalls(Heading.WEST);
+        //spaces[0][7].setWalls(Heading.WEST);
+
+        spaces[7][0].setWalls(Heading.EAST);
+        spaces[7][1].setWalls(Heading.EAST);
+        spaces[7][2].setWalls(Heading.EAST);
+        spaces[7][3].setWalls(Heading.EAST);
+        spaces[7][4].setWalls(Heading.EAST);
+        spaces[7][5].setWalls(Heading.EAST);
+        //spaces[7][6].setWalls(Heading.EAST);
+        //spaces[7][7].setWalls(Heading.EAST);
+
+        spaces[0][5].setWalls(Heading.SOUTH);
+        spaces[1][5].setWalls(Heading.SOUTH);
+        spaces[2][5].setWalls(Heading.SOUTH);
+        spaces[3][5].setWalls(Heading.SOUTH);
+        spaces[4][5].setWalls(Heading.SOUTH);
+        spaces[5][5].setWalls(Heading.SOUTH);
+        spaces[6][5].setWalls(Heading.SOUTH);
+        spaces[7][5].setWalls(Heading.SOUTH);
+
+    }
+
+    private void setObstcle(){
+        spaces[2][2].setWalls(Heading.WEST);
+        spaces[5][3].setWalls(Heading.NORTH);
+        spaces[2][4].setWalls(Heading.EAST);
+        spaces[4][3].setWalls(Heading.SOUTH);
     }
 
     public Board(int width, int height) {
@@ -184,6 +235,10 @@ public class Board extends Subject {
      * @return the space in the given direction; null if there is no (reachable) neighbour
      */
     public Space getNeighbour(@NotNull Space space, @NotNull Heading heading) {
+        if (space.getWalls().contains(heading)) {
+            return null;
+        }
+
         int x = space.x;
         int y = space.y;
         switch (heading) {
@@ -201,7 +256,15 @@ public class Board extends Subject {
                 break;
         }
 
-        return getSpace(x, y);
+        //return getSpace(x, y);
+        Heading reverse = Heading.values()[(heading.ordinal() + 2)% Heading.values().length];
+        Space result = getSpace(x, y);
+        if (result != null) {
+            if (result.getWalls().contains(reverse)) {
+                return null;
+            }
+        }
+        return result;
     }
 
     public String getStatusMessage() {

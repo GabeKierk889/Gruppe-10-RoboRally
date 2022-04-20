@@ -24,6 +24,9 @@ package dk.dtu.compute.se.pisd.roborally.model;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.view.BoardView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ...
  *
@@ -31,6 +34,8 @@ import dk.dtu.compute.se.pisd.roborally.view.BoardView;
  *
  */
 public class Space extends Subject {
+
+    private List<Heading> walls = new ArrayList<>();
 
     public final Board board;
 
@@ -93,5 +98,12 @@ public class Space extends Subject {
                 player.setCheckPointToken(checkPointToken.getTokenNumber());
             }
         }
+    }
+
+    public void setWalls(Heading heading){
+        this.walls.add(heading);
+    }
+    public List<Heading> getWalls() {
+        return walls;
     }
 }

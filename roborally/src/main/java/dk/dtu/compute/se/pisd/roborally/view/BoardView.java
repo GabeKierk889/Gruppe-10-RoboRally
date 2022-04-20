@@ -23,15 +23,13 @@ package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Phase;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -73,6 +71,7 @@ public class BoardView extends VBox implements ViewObserver {
                 Space space = board.getSpace(x, y);
                 SpaceView spaceView = new SpaceView(space);
                 spaces[x][y] = spaceView;
+                drawObstacle(space, spaces[x][y]);
                 mainBoardPane.add(spaceView, x, y);
                 spaceView.setOnMouseClicked(spaceEventHandler);
             }
@@ -80,6 +79,30 @@ public class BoardView extends VBox implements ViewObserver {
 
         board.attach(this);
         update(board);
+    }
+
+    private void drawObstacle(Space space, SpaceView spaceView){
+        BorderStrokeStyle top, right, down, left;
+        top= BorderStrokeStyle.NONE;
+        right= BorderStrokeStyle.NONE;
+        down= BorderStrokeStyle.NONE;
+        left= BorderStrokeStyle.NONE;
+        if(space.getWalls().contains(Heading.NORTH)){
+            top= BorderStrokeStyle.SOLID;
+        }
+        if(space.getWalls().contains(Heading.SOUTH)){
+            down= BorderStrokeStyle.SOLID;
+        }
+        if(space.getWalls().contains(Heading.EAST)){
+            right= BorderStrokeStyle.SOLID;
+        }
+        if(space.getWalls().contains(Heading.WEST)){
+            left=BorderStrokeStyle.SOLID;
+        }
+
+        spaceView.setBorder(new Border(new BorderStroke(Color.RED, Color.RED, Color.RED, Color.RED,
+                top, right, down, left,
+                CornerRadii.EMPTY, new BorderWidths(3), Insets.EMPTY)));
     }
 
     @Override

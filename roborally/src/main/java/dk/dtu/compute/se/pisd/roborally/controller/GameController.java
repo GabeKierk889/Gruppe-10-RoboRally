@@ -25,14 +25,21 @@ import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * ...
+ * The GameController is responsible for handling the all
+ * game request ,logic ,update the model and returns the view that should be changed.
  *
  * @author Ekkart Kindler, ekki@dtu.dk
+ *
  */
 public class GameController {
 
     final public Board board;
 
+    /**
+     * This constructor takes a board as input.
+     *
+     * @param board the board which game should be played on.
+     */
     public GameController(@NotNull Board board) {
         this.board = board;
     }
@@ -63,6 +70,9 @@ public class GameController {
 
     }
 
+    /**
+     * This methode allows the player to get some random cammand cards where players can program their robot with.
+     */
     // XXX: V2
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
@@ -93,6 +103,10 @@ public class GameController {
         return new CommandCard(commands[random]);
     }
 
+    /**
+     * This method allows the players to finish the programing phase, and
+     * activates the activation phase, "Execute Program" and "Execute Current Register" buttons
+     */
     // XXX: V2
     public void finishProgrammingPhase() {
         makeProgramFieldsInvisible();
@@ -124,12 +138,19 @@ public class GameController {
         }
     }
 
+    /**
+     * This methodes  executes the all programs card of all robots.
+     */
     // XXX: V2
     public void executePrograms() {
         board.setStepMode(false);
         continuePrograms();
     }
 
+    /**
+     * This methode executes the current map of the current robot,
+     * so in this way the player click step by step throughout the program
+     */
     // XXX: V2
     public void executeStep() {
         board.setStepMode(true);
@@ -252,7 +273,46 @@ public class GameController {
         }
     }
 
+    void moveToSpace(@NotNull Player player, @NotNull Space space, @NotNull Heading heading) throws ImpossibleMoveException {
+        assert board.getNeighbour(player.getSpace(), heading) == space; // make sure the move to here is possible in principle
+        Player other = space.getPlayer();
+        if (other != null){
+            Space target = board.getNeighbour(space, heading);
+            if (target != null) {
+                // XXX Note that there might be additional problems with
+                //     infinite recursion here (in some special cases)!
+                //     We will come back to that!
+                moveToSpace(other, target, heading);
 
+                // Note that we do NOT embed the above statement in a try catch block, since
+                // the thrown exception is supposed to be passed on to the caller
+
+                assert target.getPlayer() == null : target; // make sure target is free now
+            } else {
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
+        player.setSpace(space);
+    }
+
+    class ImpossibleMoveException extends Exception {
+
+        private Player player;
+        private Space space;
+        private Heading heading;
+
+        public ImpossibleMoveException(Player player, Space space, Heading heading) {
+            super("Move impossible");
+            this.player = player;
+            this.space = space;
+            this.heading = heading;
+        }
+    }
+
+    /**
+     * This methode moves the player's robot 1 cell to the forwarded in the headed direction
+     * @param player the player whose robots should be moved forward.
+     */
     // TODO: V2
     public void moveForward(@NotNull Player player) {
         Space space = player.getSpace();
@@ -263,9 +323,20 @@ public class GameController {
                 Player oldPlayer = target.getPlayer();
                 if (oldPlayer != null) {
                     Space pushTarget = board.getNeighbour(target, heading);
-                    pushPlayer(oldPlayer, pushTarget);
+                    //pushPlayer(oldPlayer, pushTarget);
+                    try {
+                        moveToSpace(oldPlayer, pushTarget, heading);
+                    } catch (ImpossibleMoveException e) {}
                 }
-                target.setPlayer(player);
+
+                try {
+                    moveToSpace(player, target, heading);
+                } catch (ImpossibleMoveException e) {
+                    // we don't do anything here  for now; we just catch the
+                    // exception so that we do no pass it on to the caller
+                    // (which would be very bad style).
+                }
+                //target.setPlayer(player);
             }
         }
     }
@@ -282,18 +353,31 @@ public class GameController {
             if (oldPlayer != null) {
                 Heading heading = pushedPlayer.getHeading();
                 Space nextTarget = board.getNeighbour(pushTarget, heading);
-                pushPlayer(oldPlayer,nextTarget);
+                pushPlayer(oldPlayer, nextTarget);
+                /*if(nextTarget != null) {
+                    pushPlayer(oldPlayer, nextTarget);
+                }else{
+                    System.out.println("wall avoid older player to move");
+                }*/
             }
             pushTarget.setPlayer(pushedPlayer);
         }
     }
 
+    /**
+     * This methode moves the player's robot 2 cell to the forwarded in the headed direction
+     * @param player the player whose robots should be moved forward.
+     */
     // TODO: V2
     public void fastForward(@NotNull Player player) {
         moveForward(player);
         moveForward(player);
     }
 
+    /**
+     * This methode turns the player's robot 90 degree to the right
+     * @param player the player whose robots should be turned.
+     */
     // TODO: V2
     public void turnRight(@NotNull Player player) {
         if (player != null && player.board == board) {
@@ -301,6 +385,10 @@ public class GameController {
         }
     }
 
+    /**
+     * This methode turns the player's robot 90 degree to the left
+     * @param player the player whose robots should be turned.
+     */
     // TODO: V2
     public void turnLeft(@NotNull Player player) {
         if (player != null && player.board == board) {
@@ -324,6 +412,12 @@ public class GameController {
     }
 
 
+    /**
+     * This method allows moves the card between the commandCards fields
+     * @param source the source where the card should be moved from.
+     * @param target the target where the card should be moved to
+     * @return return true if card can be moved successfully, otherwise return false.
+     */
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
