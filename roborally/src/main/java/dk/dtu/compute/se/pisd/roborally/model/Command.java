@@ -45,7 +45,7 @@ public enum Command {
     // XXX Assignment P3
     OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
     OPTION_WEASEL_ROUTINE("Left, Right OR U-Turn", LEFT, RIGHT, U_TURN),
-    OPTION_SANDBOX_ROUTINE("Move 1/2/3, Backup, Left, Right, U-Turn", FORWARD, FAST_FORWARD, SPEED_ROUTINE, LEFT, RIGHT, U_TURN);
+    OPTION_SANDBOX_ROUTINE("Move 1-3, Back, Left, Right, U-Turn", FORWARD, FAST_FORWARD, SPEED_ROUTINE, BACKWARD, LEFT, RIGHT, U_TURN);
 
     final public String displayName;
 
