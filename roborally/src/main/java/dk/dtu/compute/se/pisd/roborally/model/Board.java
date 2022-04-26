@@ -71,6 +71,7 @@ public class Board extends Subject {
             }
         }
 
+        // each board has only 1 antenna, and it must be on an edge of the board
         setPriorityAntenna(0, 4, Heading.EAST);
         setBoardWall();
         setObstcle();
@@ -296,14 +297,17 @@ public class Board extends Subject {
     }
 
     private void setPriorityAntenna(int x, int y, Heading faces) {
-        // create the priority-antenna
-        antenna = new PriorityAntenna(x, y, faces);
+        // priority antennas are always on an edge of the board
+        if ((x == 0 || x == spaces.length - 1) || (y == 0 || y == spaces[0].length - 1)) {
+            // create the priority-antenna
+            antenna = new PriorityAntenna(x, y, faces);
 
-        // priority antenna acts as if it has 4 walls around it
-        spaces[x][y].setWalls(Heading.NORTH);
-        spaces[x][y].setWalls(Heading.SOUTH);
-        spaces[x][y].setWalls(Heading.EAST);
-        spaces[x][y].setWalls(Heading.WEST);
+            // a priority antenna acts as if it has 4 walls around it
+            spaces[x][y].setWalls(Heading.NORTH);
+            spaces[x][y].setWalls(Heading.SOUTH);
+            spaces[x][y].setWalls(Heading.EAST);
+            spaces[x][y].setWalls(Heading.WEST);
+        }
     }
 
     private Integer calculateDistanceToPriorityAntenna(Space space) {
