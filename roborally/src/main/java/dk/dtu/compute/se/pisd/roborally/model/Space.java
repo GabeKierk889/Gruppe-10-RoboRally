@@ -22,7 +22,6 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.view.BoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class Space extends Subject {
 
     private Player player;
 
-    private CheckPointToken checkPointToken;
+    private CheckPoint checkPointToken;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -81,21 +80,21 @@ public class Space extends Subject {
         notifyChange();
     }
 
-    public CheckPointToken getCheckPointToken() {
+    public CheckPoint getCheckPointToken() {
         return checkPointToken;
     }
 
     public void setCheckPointToken(int tokenNumber) {
-        checkPointToken = new CheckPointToken(tokenNumber);
+        checkPointToken = new CheckPoint(tokenNumber);
     }
 
     public void giveTokenIfOnEndOnCheckpoint() {
         if (checkPointToken != null) { // if this space is a checkpoint,
             // we need to check if a player should get a checkpoint token and updates their token number
             if ((player.getCheckPointToken() != null &&
-                    checkPointToken.getTokenNumber() - player.getCheckPointToken().getTokenNumber() == 1)
-                    || (player.getCheckPointToken() == null && checkPointToken.getTokenNumber() == 1)) {
-                player.setCheckPointToken(checkPointToken.getTokenNumber());
+                    checkPointToken.getCheckpointNumber() - player.getCheckPointToken().getCheckpointNumber() == 1)
+                    || (player.getCheckPointToken() == null && checkPointToken.getCheckpointNumber() == 1)) {
+                player.setCheckPointToken(checkPointToken.getCheckpointNumber());
             }
         }
     }

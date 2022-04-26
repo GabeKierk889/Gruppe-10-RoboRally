@@ -51,22 +51,15 @@ public class GameController {
      * @param space the space to which the current player should move
      */
     public void moveCurrentPlayerToSpace(@NotNull Space space) {
-        // TODO Assignment V1: method should be implemented by the students:
-        //   - the current player should be moved to the given space
-        //     (if it is free()
-        //   - and the current player should be set to the player
-        //     following the current player
-        //   - the counter of moves in the game should be increased by one
-        //     if the player is moved
-
-        if (space != null && space.board == board) {
-            Player currentPlayer = board.getCurrentPlayer();
-            if (currentPlayer != null && space.getPlayer() == null) {
-                currentPlayer.setSpace(space);
-                int playerNumber = (board.getPlayerNumber(currentPlayer) + 1) % board.getPlayersNumber();
-                board.setCurrentPlayer(board.getPlayer(playerNumber));
-            }
-        }
+//        Commented out as it is not a part of the game rules
+//        if (space != null && space.board == board) {
+//            Player currentPlayer = board.getCurrentPlayer();
+//            if (currentPlayer != null && space.getPlayer() == null) {
+//                currentPlayer.setSpace(space);
+//                int playerNumber = (board.getPlayerNumber(currentPlayer) + 1) % board.getPlayersNumber();
+//                board.setCurrentPlayer(board.getPlayer(playerNumber));
+//            }
+//        }
 
     }
 
@@ -112,6 +105,9 @@ public class GameController {
         makeProgramFieldsInvisible();
         makeProgramFieldsVisible(0);
         board.setPhase(Phase.ACTIVATION);
+        // update player priority based on distance from priority antenna
+        // this line is only in case priority was not updated at the end of the last register - i.e. at start of game
+        board.sortPlayersAccordingToPriority();
         board.setCurrentPlayer(board.getPlayer(0));
         board.setStep(0);
     }
@@ -191,6 +187,8 @@ public class GameController {
                     // check if any player has won the game
                     checkForWinner();
                     step++;
+                    // update player priority based on distance from priority antenna
+                    board.sortPlayersAccordingToPriority();
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
                         board.setStep(step);
@@ -225,6 +223,8 @@ public class GameController {
             // check if any player has won the game
             checkForWinner();
             step++;
+            // update player priority based on distance from priority antenna
+            board.sortPlayersAccordingToPriority();
             if (step < Player.NO_REGISTERS) {
                 makeProgramFieldsVisible(step);
                 board.setStep(step);
@@ -443,7 +443,7 @@ public class GameController {
         // if a player has collected the last token, they have won
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             if (board.getPlayer(i).getCheckPointToken() != null
-            && board.getPlayer(i).getCheckPointToken().getTokenNumber() == board.getMaxTokenNumber()) {
+            && board.getPlayer(i).getCheckPointToken().getCheckpointNumber() == board.getMaxTokenNumber()) {
                 // TODO - update the 2 lines below, display the relevant message and end the game
                 board.setPhase(Phase.INITIALISATION);
                 System.out.println("Player "+ (i+1) + " has won the game!");

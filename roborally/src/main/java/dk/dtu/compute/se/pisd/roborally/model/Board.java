@@ -25,6 +25,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
@@ -36,7 +37,7 @@ import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
  *
  */
 public class Board extends Subject {
-
+    private PriorityAntenna antenna;
     public final int width;
 
     public final int height;
@@ -70,12 +71,11 @@ public class Board extends Subject {
             }
         }
 
+        setPriorityAntenna(0, 4, Heading.EAST);
         setBoardWall();
         setObstcle();
+        setCheckpoint();
 
-        // set up the spaces which have checkpoint tokens on them
-        spaces[7][5].setCheckPointToken(1);
-        spaces[0][0].setCheckPointToken(2);
         this.stepMode = false;
     }
 
@@ -124,6 +124,11 @@ public class Board extends Subject {
         spaces[5][3].setWalls(Heading.NORTH);
         spaces[2][4].setWalls(Heading.EAST);
         spaces[4][3].setWalls(Heading.SOUTH);
+    }
+
+    private void setCheckpoint() {
+        spaces[7][5].setCheckPointToken(1);
+        spaces[0][0].setCheckPointToken(2);
     }
 
     public Board(int width, int height) {
@@ -272,7 +277,7 @@ public class Board extends Subject {
         // the students, this method gives a string representation of the current
         // status of the game
 
-        int checkpoint = getCurrentPlayer().getCheckPointToken() == null ? 0 : getCurrentPlayer().getCheckPointToken().getTokenNumber();
+        int checkpoint = getCurrentPlayer().getCheckPointToken() == null ? 0 : getCurrentPlayer().getCheckPointToken().getCheckpointNumber();
         return "Phase: " + getPhase().name() +
                 ", Player = " + getCurrentPlayer().getName() +
                 ", Step: " + getStep() +
@@ -284,9 +289,89 @@ public class Board extends Subject {
         for (Space[] spaceArray : spaces) {
             for (int i = 0; i < spaceArray.length; i++) {
                 if (spaceArray[i].getCheckPointToken() != null)
-                    max = Math.max(max, spaceArray[i].getCheckPointToken().getTokenNumber());
+                    max = Math.max(max, spaceArray[i].getCheckPointToken().getCheckpointNumber());
             }
         }
         return max;
+    }
+
+    private void setPriorityAntenna(int x, int y, Heading faces) {
+        // create the priority-antenna
+        antenna = new PriorityAntenna(x, y, faces);
+
+        // priority antenna acts as if it has 4 walls around it
+        spaces[x][y].setWalls(Heading.NORTH);
+        spaces[x][y].setWalls(Heading.SOUTH);
+        spaces[x][y].setWalls(Heading.EAST);
+        spaces[x][y].setWalls(Heading.WEST);
+    }
+
+    private Integer calculateDistanceToPriorityAntenna(Space space) {
+        int x_distance = Math.abs(space.x - antenna.getPriorityAntenna_xcoord());
+        int y_distance = Math.abs(space.y - antenna.getPriorityAntenna_ycoord());
+        return x_distance + y_distance;
+    }
+
+    public void sortPlayersAccordingToPriority() {
+        // sort players according to distance
+        Comparator<Player> c = Comparator.comparing(p -> calculateDistanceToPriorityAntenna(p.getSpace()));
+        players.sort(c);
+        // if two or more players have the same distance, sort them according to the sweep/rotate test
+        for (int i = 0; i < players.size() - 1; i++ ) {
+            if (c.compare(players.get(i), players.get(i+1)) == 0) {
+                int j = i+1;
+                int numPlayersSameDistance = 2;
+                while (j < players.size() - 1 && c.compare(players.get(j), players.get(j+1)) == 0) {
+                    numPlayersSameDistance++;
+                    j++;
+                }
+                Player temp;
+                if (antenna.getPriorityAntenna_heading() == Heading.NORTH) {
+                    // if antenna faces north, it is on the bottom edge, and sweeps clockwise from left to right
+                    for (int k = 0; k < numPlayersSameDistance; k++) {
+                        j = i + k;
+                        while (j+1 < players.size() && players.get(j).getSpace().x > players.get(j+1).getSpace().x) {
+                            temp = players.remove(j);
+                            players.add(j+1,temp);
+                            j++;
+                        }
+                    }
+                }
+                else if (antenna.getPriorityAntenna_heading() == Heading.EAST) {
+                    // if antenna faces east, it is on the left edge, and sweeps clockwise from up to down
+                    for (int k = 0; k < numPlayersSameDistance; k++) {
+                        j = i + k;
+                        while (j+1 < players.size() && players.get(j).getSpace().y > players.get(j+1).getSpace().y) {
+                            temp = players.remove(j);
+                            players.add(j+1,temp);
+                            j++;
+                        }
+                    }
+                }
+                else if (antenna.getPriorityAntenna_heading() == Heading.SOUTH) {
+                    // if antenna faces south, it is on the top edge, and sweeps clockwise from right to left
+                    for (int k = 0; k < numPlayersSameDistance; k++) {
+                        j = i + k;
+                        while (j+1 < players.size() && players.get(j).getSpace().x < players.get(j+1).getSpace().x) {
+                            temp = players.remove(j);
+                            players.add(j+1,temp);
+                            j++;
+                        }
+                    }
+                }
+                else if (antenna.getPriorityAntenna_heading() == Heading.WEST) {
+                    // if antenna faces west, it is on the right edge, and sweeps clockwise from down to up
+                    for (int k = 0; k < numPlayersSameDistance; k++) {
+                        j = i + k;
+                        while (j+1 < players.size() && players.get(j).getSpace().y < players.get(j+1).getSpace().y) {
+                            temp = players.remove(j);
+                            players.add(j+1,temp);
+                            j++;
+                        }
+                    }
+                }
+                i += numPlayersSameDistance - 1;
+            }
+        }
     }
 }

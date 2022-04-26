@@ -1,17 +1,17 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
-public class CheckPointToken {
+public class CheckPoint {
     private int number;
 
-    public CheckPointToken(int number) {
+    public CheckPoint(int number) {
         this.number = number;
     }
 
-    public int getTokenNumber() {
+    public int getCheckpointNumber() {
         return number;
     }
 
-    public void setTokenNumber(int number) {
+    public void setCheckpointNumber(int number) {
         this.number = number;
     }
 

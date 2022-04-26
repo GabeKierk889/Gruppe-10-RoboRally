@@ -57,7 +57,9 @@ public class PlayersView extends TabPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == board) {
             Player current = board.getCurrentPlayer();
-            this.getSelectionModel().select(board.getPlayerNumber(current));
+            String name = current.getName();
+            int number = Character.getNumericValue(name.charAt(name.length()-1));
+            this.getSelectionModel().select(number-1);
         }
     }
 
