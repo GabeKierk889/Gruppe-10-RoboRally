@@ -310,7 +310,7 @@ public class Board extends Subject {
         }
     }
 
-    private Integer calculateDistanceToPriorityAntenna(Space space) {
+    private int calculateDistanceToPriorityAntenna(Space space) {
         int x_distance = Math.abs(space.x - antenna.getPriorityAntenna_xcoord());
         int y_distance = Math.abs(space.y - antenna.getPriorityAntenna_ycoord());
         return x_distance + y_distance;
@@ -318,64 +318,36 @@ public class Board extends Subject {
 
     public void sortPlayersAccordingToPriority() {
         // sort players according to distance
-        Comparator<Player> c = Comparator.comparing(p -> calculateDistanceToPriorityAntenna(p.getSpace()));
-        players.sort(c);
-        // if two or more players have the same distance, sort them according to the sweep/rotate test
-        for (int i = 0; i < players.size() - 1; i++ ) {
-            if (c.compare(players.get(i), players.get(i+1)) == 0) {
-                int j = i+1;
-                int numPlayersSameDistance = 2;
-                while (j < players.size() - 1 && c.compare(players.get(j), players.get(j+1)) == 0) {
-                    numPlayersSameDistance++;
-                    j++;
-                }
-                Player temp;
+        Comparator<Player> c = (o1, o2) -> {
+            if (calculateDistanceToPriorityAntenna(o1.getSpace()) < calculateDistanceToPriorityAntenna(o2.getSpace()))
+                return -1;
+            else if (calculateDistanceToPriorityAntenna(o1.getSpace()) > calculateDistanceToPriorityAntenna(o2.getSpace()))
+                return 1;
+            else { // if two or more players have the same distance, sort them according to the sweep/rotate test
                 if (antenna.getPriorityAntenna_heading() == Heading.NORTH) {
                     // if antenna faces north, it is on the bottom edge, and sweeps clockwise from left to right
-                    for (int k = 0; k < numPlayersSameDistance; k++) {
-                        j = i + k;
-                        while (j+1 < players.size() && players.get(j).getSpace().x > players.get(j+1).getSpace().x) {
-                            temp = players.remove(j);
-                            players.add(j+1,temp);
-                            j++;
-                        }
-                    }
+                    if (o1.getSpace().x < o2.getSpace().x)
+                        return -1;
+                    else return 1;
                 }
                 else if (antenna.getPriorityAntenna_heading() == Heading.EAST) {
                     // if antenna faces east, it is on the left edge, and sweeps clockwise from up to down
-                    for (int k = 0; k < numPlayersSameDistance; k++) {
-                        j = i + k;
-                        while (j+1 < players.size() && players.get(j).getSpace().y > players.get(j+1).getSpace().y) {
-                            temp = players.remove(j);
-                            players.add(j+1,temp);
-                            j++;
-                        }
-                    }
-                }
+                    if (o1.getSpace().y < o2.getSpace().y)
+                        return -1;
+                    else return 1;                    }
                 else if (antenna.getPriorityAntenna_heading() == Heading.SOUTH) {
                     // if antenna faces south, it is on the top edge, and sweeps clockwise from right to left
-                    for (int k = 0; k < numPlayersSameDistance; k++) {
-                        j = i + k;
-                        while (j+1 < players.size() && players.get(j).getSpace().x < players.get(j+1).getSpace().x) {
-                            temp = players.remove(j);
-                            players.add(j+1,temp);
-                            j++;
-                        }
-                    }
-                }
+                    if (o1.getSpace().x > o2.getSpace().x)
+                        return -1;
+                    else return 1;                    }
                 else if (antenna.getPriorityAntenna_heading() == Heading.WEST) {
                     // if antenna faces west, it is on the right edge, and sweeps clockwise from down to up
-                    for (int k = 0; k < numPlayersSameDistance; k++) {
-                        j = i + k;
-                        while (j+1 < players.size() && players.get(j).getSpace().y < players.get(j+1).getSpace().y) {
-                            temp = players.remove(j);
-                            players.add(j+1,temp);
-                            j++;
-                        }
-                    }
-                }
-                i += numPlayersSameDistance - 1;
+                    if (o1.getSpace().y > o2.getSpace().y)
+                        return -1;
+                    else return 1;                    }
+                else return 0;
             }
-        }
+        };
+        players.sort(c);
     }
 }

@@ -320,15 +320,6 @@ public class GameController {
             Heading heading = player.getHeading();
             Space target = board.getNeighbour(space, heading);
             if (target != null) {
-                Player oldPlayer = target.getPlayer();
-                if (oldPlayer != null) {
-                    Space pushTarget = board.getNeighbour(target, heading);
-                    //pushPlayer(oldPlayer, pushTarget);
-                    try {
-                        moveToSpace(oldPlayer, pushTarget, heading);
-                    } catch (ImpossibleMoveException e) {}
-                }
-
                 try {
                     moveToSpace(player, target, heading);
                 } catch (ImpossibleMoveException e) {
@@ -345,23 +336,6 @@ public class GameController {
         uTurn(player);
         moveForward(player);
         uTurn(player);
-    }
-
-    public void pushPlayer (@NotNull Player pushedPlayer, @NotNull Space pushTarget) {
-        if (pushTarget != null) {
-            Player oldPlayer = pushTarget.getPlayer();
-            if (oldPlayer != null) {
-                Heading heading = pushedPlayer.getHeading();
-                Space nextTarget = board.getNeighbour(pushTarget, heading);
-                pushPlayer(oldPlayer, nextTarget);
-                /*if(nextTarget != null) {
-                    pushPlayer(oldPlayer, nextTarget);
-                }else{
-                    System.out.println("wall avoid older player to move");
-                }*/
-            }
-            pushTarget.setPlayer(pushedPlayer);
-        }
     }
 
     /**
