@@ -317,7 +317,7 @@ public class Board extends Subject {
     }
 
     public void sortPlayersAccordingToPriority() {
-        // sort players according to distance
+        // sort players according to distance from antenna
         Comparator<Player> c = (o1, o2) -> {
             if (calculateDistanceToPriorityAntenna(o1.getSpace()) < calculateDistanceToPriorityAntenna(o2.getSpace()))
                 return -1;
@@ -345,7 +345,7 @@ public class Board extends Subject {
                     if (o1.getSpace().y > o2.getSpace().y)
                         return -1;
                     else return 1;                    }
-                else return 0;
+                else return 0; // this should technically not be possible
             }
         };
         players.sort(c);

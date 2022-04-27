@@ -176,27 +176,7 @@ public class GameController {
                         executeCommand(currentPlayer, command);
                     }
                 }
-                int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
-                if (nextPlayerNumber < board.getPlayersNumber()) {
-                    board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
-                } else {
-                    // this is the end of a register
-                    // at the end of a register, check if any player gets a checkpoint token
-                    for (int i = 0; i < board.getPlayersNumber(); i++)
-                        board.getPlayer(i).getSpace().giveTokenIfOnEndOnCheckpoint();
-                    // check if any player has won the game
-                    checkForWinner();
-                    step++;
-                    // update player priority based on distance from priority antenna
-                    board.sortPlayersAccordingToPriority();
-                    if (step < Player.NO_REGISTERS) {
-                        makeProgramFieldsVisible(step);
-                        board.setStep(step);
-                        board.setCurrentPlayer(board.getPlayer(0));
-                    } else {
-                        startProgrammingPhase();
-                    }
-                }
+                passOnTurnOrSwitchRegister(currentPlayer, step);
             } else {
                 // this should not happen
                 assert false;
@@ -212,6 +192,13 @@ public class GameController {
         board.setPhase(Phase.ACTIVATION);
         executeCommand(currentPlayer, command);
         int step = board.getStep();
+        passOnTurnOrSwitchRegister(currentPlayer, step);
+        while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode()) {
+            executeNextStep();
+        }
+    }
+
+    private void passOnTurnOrSwitchRegister(Player currentPlayer, int step) {
         int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
         if (nextPlayerNumber < board.getPlayersNumber()) {
             board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
@@ -232,9 +219,6 @@ public class GameController {
             } else {
                 startProgrammingPhase();
             }
-        }
-        while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode()) {
-            executeNextStep();
         }
     }
 
