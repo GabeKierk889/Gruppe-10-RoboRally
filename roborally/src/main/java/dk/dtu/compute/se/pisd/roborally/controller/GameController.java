@@ -314,6 +314,8 @@ public class GameController {
                 //target.setPlayer(player);
             }
         }
+        space = player.getSpace();
+        for(FieldAction action: space.getActions()){ action.doAction(this, space); }
     }
 
     public void moveBackward(@NotNull Player player) {

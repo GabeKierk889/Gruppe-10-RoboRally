@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ import java.util.List;
 public class Space extends Subject {
 
     private List<Heading> walls = new ArrayList<>();
+    private List<FieldAction> actions = new ArrayList<>();
 
     public final Board board;
 
@@ -105,4 +107,7 @@ public class Space extends Subject {
     public List<Heading> getWalls() {
         return walls;
     }
+
+    public void addAction(FieldAction action){ actions.add(action); }
+    public List<FieldAction> getActions() { return actions; }
 }

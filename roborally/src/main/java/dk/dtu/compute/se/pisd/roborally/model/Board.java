@@ -22,6 +22,8 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -75,9 +77,33 @@ public class Board extends Subject {
         setPriorityAntenna(0, 4, Heading.EAST);
         setBoardWall();
         setObstcle();
+        setConveyorBelt();
         setCheckpoint();
 
         this.stepMode = false;
+    }
+
+    private void setConveyorBelt(){
+        ConveyorBelt belt1= new ConveyorBelt();
+        belt1.setHeading(Heading.SOUTH);
+        belt1.setColor(Color.BLUE);
+        spaces[7][1].addAction(belt1);
+        ConveyorBelt belt2= new ConveyorBelt();
+        belt2.setHeading(Heading.EAST);
+        belt2.setColor(Color.GREEN);
+        spaces[2][1].addAction(belt2);
+        ConveyorBelt belt3= new ConveyorBelt();
+        belt3.setHeading(Heading.NORTH);
+        belt3.setColor(Color.GREEN);
+        spaces[3][5].addAction(belt3);
+        ConveyorBelt belt4= new ConveyorBelt();
+        belt4.setHeading(Heading.WEST);
+        belt4.setColor(Color.GREEN);
+        spaces[6][3].addAction(belt4);
+        ConveyorBelt belt5=new ConveyorBelt();
+        belt5.setHeading(Heading.NORTH);
+        belt5.setColor(Color.BLUE);
+        spaces[2][4].addAction(belt5);
     }
 
     private void setBoardWall(){
@@ -294,6 +320,10 @@ public class Board extends Subject {
             }
         }
         return max;
+    }
+
+    public PriorityAntenna getAntenna(){
+        return antenna;
     }
 
     private void setPriorityAntenna(int x, int y, Heading faces) {

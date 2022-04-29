@@ -22,6 +22,8 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.event.EventHandler;
@@ -31,6 +33,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
+
+import java.net.URL;
 
 /**
  * ...
@@ -66,21 +70,50 @@ public class BoardView extends VBox implements ViewObserver {
 
         spaceEventHandler = new SpaceEventHandler(gameController);
 
-        for (int x = 0; x < board.width; x++) {
+         for (int x = 0; x < board.width; x++) {
             for (int y = 0; y < board.height; y++) {
                 Space space = board.getSpace(x, y);
                 SpaceView spaceView = new SpaceView(space);
                 spaces[x][y] = spaceView;
                 drawObstacle(space, spaces[x][y]);
+                drawConveyorBelt(space, spaces[x][y]);
                 mainBoardPane.add(spaceView, x, y);
                 spaceView.setOnMouseClicked(spaceEventHandler);
             }
         }
-
+        drawAntena();
         board.attach(this);
         update(board);
     }
 
+    private void drawConveyorBelt(Space space, SpaceView spaceView){
+        ConveyorBelt cb = (ConveyorBelt) space.getActions().stream().filter((FieldAction fa)-> fa.getClass().getSimpleName().equals("ConveyorBelt")).findAny().orElse(null);
+        if(cb != null){
+            String imgURL, repeat,size, position, beltColor;
+            String path= this.getClass().getResource("../../../../../../../image/").toString();
+            if (cb.getColor() == Color.BLUE) {
+                repeat="repeat-x";
+                size="32 32";
+                position="left center";
+                beltColor="Blue";
+            }
+            else{
+                repeat="no-repeat";
+                size="42 42";
+                position="center center";
+                beltColor="Green";
+            }
+
+            if (cb.getHeading() == Heading.NORTH) { imgURL = path + beltColor +"Up.png"; }
+            else if (cb.getHeading() == Heading.SOUTH) { imgURL = path + beltColor + "Down.png"; }
+            else if (cb.getHeading() == Heading.EAST) { imgURL = path  + beltColor + "Right.png"; }
+            else { imgURL = path + beltColor + "Left.png"; }
+
+            String bgColor= "black";
+            if((space.x + space.y) % 2 == 0){ bgColor= "white";}
+            spaceView.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-color: "+bgColor+";-fx-background-repeat: "+repeat+"; -fx-background-size: "+size+"; -fx-background-position:"+position+";");
+        }
+    }
     private void drawObstacle(Space space, SpaceView spaceView){
         BorderStrokeStyle top, right, down, left;
         top= BorderStrokeStyle.NONE;
@@ -103,6 +136,12 @@ public class BoardView extends VBox implements ViewObserver {
         spaceView.setBorder(new Border(new BorderStroke(Color.RED, Color.RED, Color.RED, Color.RED,
                 top, right, down, left,
                 CornerRadii.EMPTY, new BorderWidths(3), Insets.EMPTY)));
+    }
+    private void drawAntena(){
+        int x= board.getAntenna().getPriorityAntenna_xcoord();
+        int y= board.getAntenna().getPriorityAntenna_ycoord();
+        String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "antenna.png";
+        spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
     }
 
     @Override
