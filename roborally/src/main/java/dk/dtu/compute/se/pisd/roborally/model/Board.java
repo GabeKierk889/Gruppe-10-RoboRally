@@ -45,13 +45,14 @@ public class Board extends Subject {
     public final int height;
 
     public final String boardName;
-    int x;
 
     private Integer gameId;
 
     private final Space[][] spaces;
 
     private final List<Player> players = new ArrayList<>();
+
+    private List<CheckPoint> checkPoints = new ArrayList<>();
 
     private Player current;
 
@@ -73,17 +74,14 @@ public class Board extends Subject {
             }
         }
 
-        // each board has only 1 antenna, and it must be on an edge of the board
-        setPriorityAntenna(0, 4, Heading.EAST);
-        setBoardWall();
-        setObstcle();
-        setConveyorBelt();
-        setCheckpoint();
-
         this.stepMode = false;
+
+        // NOTE - Board-constructor must NOT invoke below setConveyorBelt etc. methods,
+        // as constructor is also used to load existing boards with different setups
+        // the below methods that pertain to a new board must only be called in newGame() method
     }
 
-    private void setConveyorBelt(){
+    public void setConveyorBelt(){
         ConveyorBelt belt1= new ConveyorBelt();
         belt1.setHeading(Heading.SOUTH);
         belt1.setColor(Color.BLUE);
@@ -106,7 +104,7 @@ public class Board extends Subject {
         spaces[2][4].addAction(belt5);
     }
 
-    private void setBoardWall(){
+    public void setBoardWall(){
 
         spaces[0][0].setWalls(Heading.NORTH);
         spaces[1][0].setWalls(Heading.NORTH);
@@ -146,16 +144,22 @@ public class Board extends Subject {
 
     }
 
-    private void setObstcle(){
+    public void setObstcle(){
         spaces[2][2].setWalls(Heading.WEST);
         spaces[5][3].setWalls(Heading.NORTH);
         spaces[2][4].setWalls(Heading.EAST);
         spaces[4][3].setWalls(Heading.SOUTH);
     }
 
-    private void setCheckpoint() {
-        spaces[7][5].setCheckPointToken(1);
-        spaces[0][0].setCheckPointToken(2);
+    public void setCheckpoint(int x, int y) {
+        CheckPoint cp1 = new CheckPoint(x,y);
+        spaces[x][y].setCheckPoint(cp1);
+        checkPoints.add(cp1);
+    }
+
+    public void sortCheckPointsInNumberOrder() {
+        Comparator<CheckPoint> c = Comparator.comparingInt(CheckPoint::getCheckpointNumber);
+        checkPoints.sort(c);
     }
 
     public Board(int width, int height) {
@@ -304,29 +308,18 @@ public class Board extends Subject {
         // the students, this method gives a string representation of the current
         // status of the game
 
-        int checkpoint = getCurrentPlayer().getCheckPointToken() == null ? 0 : getCurrentPlayer().getCheckPointToken().getCheckpointNumber();
+        int checkpoint = getCurrentPlayer().getCheckPointReached();
         return "Phase: " + getPhase().name() +
                 ", Player = " + getCurrentPlayer().getName() +
                 ", Step: " + getStep() +
                 ", CheckPoints collected: " + checkpoint;
     }
 
-    public int getMaxTokenNumber() {
-        int max = 0;
-        for (Space[] spaceArray : spaces) {
-            for (int i = 0; i < spaceArray.length; i++) {
-                if (spaceArray[i].getCheckPointToken() != null)
-                    max = Math.max(max, spaceArray[i].getCheckPointToken().getCheckpointNumber());
-            }
-        }
-        return max;
-    }
-
     public PriorityAntenna getAntenna(){
         return antenna;
     }
 
-    private void setPriorityAntenna(int x, int y, Heading faces) {
+    public void setPriorityAntenna(int x, int y, Heading faces) {
         // priority antennas are always on an edge of the board
         if ((x == 0 || x == spaces.length - 1) || (y == 0 || y == spaces[0].length - 1)) {
             // create the priority-antenna
@@ -340,7 +333,7 @@ public class Board extends Subject {
         }
     }
 
-    private int calculateDistanceToPriorityAntenna(Space space) {
+    public int calculateDistanceToPriorityAntenna(Space space) {
         int x_distance = Math.abs(space.x - antenna.getPriorityAntenna_xcoord());
         int y_distance = Math.abs(space.y - antenna.getPriorityAntenna_ycoord());
         return x_distance + y_distance;
@@ -379,5 +372,9 @@ public class Board extends Subject {
             }
         };
         players.sort(c);
+    }
+
+    public List<CheckPoint> getCheckPoints() {
+        return checkPoints;
     }
 }

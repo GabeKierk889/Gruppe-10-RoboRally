@@ -30,6 +30,7 @@ import dk.dtu.compute.se.pisd.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.Adapter;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -86,6 +87,13 @@ public class AppController implements Observer {
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
             Board board = new Board(8,6);
+            // each board has only 1 antenna, and it must be on an edge of the board
+            board.setPriorityAntenna(0, 4, Heading.EAST);
+            board.setBoardWall();
+            board.setObstcle();
+            board.setConveyorBelt();
+            board.setCheckpoint(7,5);
+            board.setCheckpoint(0,0);
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
@@ -117,7 +125,7 @@ public class AppController implements Observer {
      */
     public void loadGame() {
         // XXX needs to be implememted eventually
-        Board board = LoadBoard.loadBoard("testboard");
+        Board board = LoadBoard.loadBoard(null);
         gameController = new GameController(board);
 
         for (int i = 0; i < 2; i++) {

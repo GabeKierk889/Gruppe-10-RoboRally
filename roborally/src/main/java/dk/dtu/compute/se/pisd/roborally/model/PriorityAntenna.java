@@ -1,5 +1,11 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.GameController;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class PriorityAntenna {
     private int priorityAntenna_xcoord;
     private int priorityAntenna_ycoord;
@@ -23,4 +29,5 @@ public class PriorityAntenna {
     public int getPriorityAntenna_ycoord() {
         return priorityAntenna_ycoord;
     }
+
 }

@@ -37,6 +37,7 @@ public class Space extends Subject {
 
     private List<Heading> walls = new ArrayList<>();
     private List<FieldAction> actions = new ArrayList<>();
+    private CheckPoint checkPoint;
 
     public final Board board;
 
@@ -45,14 +46,11 @@ public class Space extends Subject {
 
     private Player player;
 
-    private CheckPoint checkPointToken;
-
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
         this.y = y;
         player = null;
-        checkPointToken = null;
     }
 
     public Player getPlayer() {
@@ -82,25 +80,6 @@ public class Space extends Subject {
         notifyChange();
     }
 
-    public CheckPoint getCheckPointToken() {
-        return checkPointToken;
-    }
-
-    public void setCheckPointToken(int tokenNumber) {
-        checkPointToken = new CheckPoint(tokenNumber);
-    }
-
-    public void giveTokenIfOnEndOnCheckpoint() {
-        if (checkPointToken != null) { // if this space is a checkpoint,
-            // we need to check if a player should get a checkpoint token and updates their token number
-            if ((player.getCheckPointToken() != null &&
-                    checkPointToken.getCheckpointNumber() - player.getCheckPointToken().getCheckpointNumber() == 1)
-                    || (player.getCheckPointToken() == null && checkPointToken.getCheckpointNumber() == 1)) {
-                player.setCheckPointToken(checkPointToken.getCheckpointNumber());
-            }
-        }
-    }
-
     public void setWalls(Heading heading){
         this.walls.add(heading);
     }
@@ -110,4 +89,20 @@ public class Space extends Subject {
 
     public void addAction(FieldAction action){ actions.add(action); }
     public List<FieldAction> getActions() { return actions; }
+
+    public CheckPoint getCheckPoint() {
+        return checkPoint;
+    }
+
+    public void setCheckPoint(CheckPoint checkPoint) {
+        this.checkPoint = checkPoint;
+    }
+
+    public void collectCheckpointToken() {
+        if (player != null && checkPoint != null) {
+            if ((player.getCheckPointReached() > 0 && checkPoint.getCheckpointNumber() - player.getCheckPointReached() == 1)
+                    || (player.getCheckPointReached() == 0 && checkPoint.getCheckpointNumber() == 1))
+                player.setCheckPointReached(checkPoint.getCheckpointNumber());
+        }
+    }
 }

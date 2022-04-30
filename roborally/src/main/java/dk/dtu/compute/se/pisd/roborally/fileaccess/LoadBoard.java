@@ -26,15 +26,21 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.fileaccess.model.AntennaTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.BoardTemplate;
+import dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.SpaceTemplate;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.CheckPoint;
+import dk.dtu.compute.se.pisd.roborally.model.PriorityAntenna;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ...
@@ -73,6 +79,11 @@ public class LoadBoard {
 			BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
 
 			result = new Board(template.width, template.height);
+            result.setPriorityAntenna(template.antenna.x, template.antenna.y,template.antenna.heading);
+            for (CheckPointTemplate checkPointTemplate: template.checkPoints) {
+                if (result.getSpace(checkPointTemplate.x, checkPointTemplate.y) != null)
+                    result.setCheckpoint(checkPointTemplate.x, checkPointTemplate.y);
+            }
 			for (SpaceTemplate spaceTemplate: template.spaces) {
 			    Space space = result.getSpace(spaceTemplate.x, spaceTemplate.y);
 			    if (space != null) {
@@ -102,6 +113,20 @@ public class LoadBoard {
         BoardTemplate template = new BoardTemplate();
         template.width = board.width;
         template.height = board.height;
+        AntennaTemplate antennaTemplate = new AntennaTemplate();
+        antennaTemplate.x = board.getAntenna().getPriorityAntenna_xcoord();
+        antennaTemplate.y = board.getAntenna().getPriorityAntenna_ycoord();
+        antennaTemplate.heading = board.getAntenna().getPriorityAntenna_heading();
+        template.antenna = antennaTemplate;
+        board.sortCheckPointsInNumberOrder();
+        List<CheckPoint> checkpoints = board.getCheckPoints();
+        for (int i = 0; i < board.getCheckPoints().size(); i++) {
+            CheckPointTemplate checkPointTemplate = new CheckPointTemplate();
+            checkPointTemplate.checkPointNumber = checkpoints.get(i).getCheckpointNumber();
+            checkPointTemplate.x = checkpoints.get(i).getXcoordinate();
+            checkPointTemplate.y = checkpoints.get(i).getYcoordinate();
+            template.checkPoints.add(checkPointTemplate);
+        }
 
         for (int i=0; i<board.width; i++) {
             for (int j=0; j<board.height; j++) {

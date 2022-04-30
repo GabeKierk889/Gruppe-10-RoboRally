@@ -176,7 +176,7 @@ public class GameController {
                         executeCommand(currentPlayer, command);
                     }
                 }
-                passOnTurnOrSwitchRegister(currentPlayer, step);
+                switchTurnAndRegister(currentPlayer, step);
             } else {
                 // this should not happen
                 assert false;
@@ -192,21 +192,26 @@ public class GameController {
         board.setPhase(Phase.ACTIVATION);
         executeCommand(currentPlayer, command);
         int step = board.getStep();
-        passOnTurnOrSwitchRegister(currentPlayer, step);
+        switchTurnAndRegister(currentPlayer, step);
         while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode()) {
             executeNextStep();
         }
     }
 
-    private void passOnTurnOrSwitchRegister(Player currentPlayer, int step) {
+    private void switchTurnAndRegister(Player currentPlayer, int step) {
         int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
         if (nextPlayerNumber < board.getPlayersNumber()) {
             board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
         } else {
             // this is the end of a register
-            // at the end of a register, check if any player gets a checkpoint token
+            // board elements activate at the end of each register
+            for (int i = 0; i < board.getPlayersNumber(); i++) {
+                Space space = board.getPlayer(i).getSpace();
+                for(FieldAction action: space.getActions()){ action.doAction(this, space); }
+            }
+            // at the end of a register after all board elements have activated, check if any player gets a checkpoint token
             for (int i = 0; i < board.getPlayersNumber(); i++)
-                board.getPlayer(i).getSpace().giveTokenIfOnEndOnCheckpoint();
+                board.getPlayer(i).getSpace().collectCheckpointToken();
             // check if any player has won the game
             checkForWinner();
             step++;
@@ -314,8 +319,8 @@ public class GameController {
                 //target.setPlayer(player);
             }
         }
-        space = player.getSpace();
-        for(FieldAction action: space.getActions()){ action.doAction(this, space); }
+        // note - board elements only activate at the end of a register - NOT after a single move!!
+        // thus the board elements activation is called in method switchTurnAndRegister(currentPlayer, step);
     }
 
     public void moveBackward(@NotNull Player player) {
@@ -402,8 +407,8 @@ public class GameController {
     public void checkForWinner() {
         // if a player has collected the last token, they have won
         for (int i = 0; i < board.getPlayersNumber(); i++) {
-            if (board.getPlayer(i).getCheckPointToken() != null
-            && board.getPlayer(i).getCheckPointToken().getCheckpointNumber() == board.getMaxTokenNumber()) {
+            if (board.getPlayer(i).getCheckPointReached() != 0
+            && board.getPlayer(i).getCheckPointReached() == CheckPoint.highestCheckPointNumber) {
                 // TODO - update the 2 lines below, display the relevant message and end the game
                 board.setPhase(Phase.INITIALISATION);
                 System.out.println("Player "+ (i+1) + " has won the game!");
