@@ -21,21 +21,26 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonWriter;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Observer;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
-
+import dk.dtu.compute.se.pisd.roborally.fileaccess.Adapter;
+import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
-
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextInputDialog;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -102,6 +107,9 @@ public class AppController implements Observer {
      */
     public void saveGame() {
         // XXX needs to be implemented eventually
+
+        LoadBoard.saveBoard(gameController.board,"name");
+
     }
 
     /**
@@ -109,6 +117,19 @@ public class AppController implements Observer {
      */
     public void loadGame() {
         // XXX needs to be implememted eventually
+        Board board = LoadBoard.loadBoard("testboard");
+        gameController = new GameController(board);
+
+        for (int i = 0; i < 2; i++) {
+            Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
+            board.addPlayer(player);
+            player.setSpace(board.getSpace(i % board.width, i));
+        }
+
+        gameController.startProgrammingPhase();
+
+        roboRally.createBoardView(gameController);
+
         // for now, we just create a new game
         if (gameController == null) {
             newGame();

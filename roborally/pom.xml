@@ -30,6 +30,7 @@
              be included later in the course of the project are added
              already now, just to avoid missing these later. This applies
              for example to mysql, gson, guava, ...  -->
+            <!--  Gson: Java to Json conversion -->
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
