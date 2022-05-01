@@ -21,8 +21,12 @@
  */
 package dk.dtu.compute.se.pisd.roborally.fileaccess.model;
 
+import dk.dtu.compute.se.pisd.roborally.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 
 
 /**
@@ -37,6 +41,6 @@ public class BoardTemplate {
     public int height;
     public AntennaTemplate antenna;
     public List<CheckPointTemplate> checkPoints = new ArrayList<>();
-
     public List<SpaceTemplate> spaces = new ArrayList<>();
+    public String boardName;
 }

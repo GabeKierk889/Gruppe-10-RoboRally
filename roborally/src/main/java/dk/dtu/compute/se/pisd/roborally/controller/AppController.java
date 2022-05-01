@@ -21,13 +21,9 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonWriter;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Observer;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
-import dk.dtu.compute.se.pisd.roborally.fileaccess.Adapter;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
@@ -37,14 +33,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.TextInputDialog;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * The AppController is responsible for handling  implementation logic
@@ -86,14 +77,15 @@ public class AppController implements Observer {
 
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
-            Board board = new Board(8,6);
+            //TODO allow choice of which board to use to start a new game
+            Board board = new Board(8, 6, "custom");
             // each board has only 1 antenna, and it must be on an edge of the board
             board.setPriorityAntenna(0, 4, Heading.EAST);
             board.setBoardWall();
             board.setObstcle();
             board.setConveyorBelt();
-            board.setCheckpoint(7,5);
-            board.setCheckpoint(0,0);
+            board.setCheckpoint(7, 5);
+            board.setCheckpoint(0, 0);
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
@@ -102,8 +94,6 @@ public class AppController implements Observer {
                 player.setSpace(board.getSpace(i % board.width, i));
             }
 
-            // XXX: V2
-            // board.setCurrentPlayer(board.getPlayer(0));
             gameController.startProgrammingPhase();
 
             roboRally.createBoardView(gameController);
@@ -114,33 +104,39 @@ public class AppController implements Observer {
      * this methode should provide the player to save the game
      */
     public void saveGame() {
-        // XXX needs to be implemented eventually
-
-        LoadBoard.saveBoard(gameController.board,"name");
-
+        // use saveBoard() if only the board and not the game state is to be saved
+        // TODO - update name
+        LoadBoard.saveGame(gameController.board,"name");
     }
 
     /**
      * this methode should provide the player to load the game
      */
     public void loadGame() {
-        // XXX needs to be implememted eventually
-        Board board = LoadBoard.loadBoard(null);
-        gameController = new GameController(board);
-
-        for (int i = 0; i < 2; i++) {
-            Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
-            board.addPlayer(player);
-            player.setSpace(board.getSpace(i % board.width, i));
+        // TODO - make boardname dynamic in loadBoard(). currently, null will load defaultboard, otherwise it will load our custom board
+        // use loadBoard if only loading a board (no game state info) - otherwise use loadGame
+        Board board = LoadBoard.loadGame("defaultboardgame");
+        if (board != null && board.getPlayersNumber() > 0) {
+            List<Player> temp = new ArrayList<>();
+            for (int i = 0; i < board.getPlayersNumber(); i++)
+                temp.add(board.getPlayer(i));
+            board.sortPlayersAccordingToName();
+            gameController = new GameController(board);
+            roboRally.createBoardView(gameController);
+            for (int i = 0; i < temp.size(); i++)
+                board.replacePlayerAtPositionIndex(i, temp.get(i));
         }
-
-        gameController.startProgrammingPhase();
-
-        roboRally.createBoardView(gameController);
-
-        // for now, we just create a new game
-        if (gameController == null) {
+        else if (board == null) // this should not happen
             newGame();
+        else { // this should not happen in the gameflow - only happens if only a board without players is loaded (for testing)
+            for (int i = 0; i < 4; i++) {
+                Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
+                board.addPlayer(player);
+                player.setSpace(board.getSpace(i % board.width, i));
+            }
+            gameController = new GameController(board);
+            gameController.startProgrammingPhase();
+            roboRally.createBoardView(gameController);
         }
     }
 

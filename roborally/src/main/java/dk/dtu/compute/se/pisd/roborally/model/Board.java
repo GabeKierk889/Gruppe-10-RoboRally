@@ -68,7 +68,7 @@ public class Board extends Subject {
         this.height = height;
         spaces = new Space[width][height];
         for (int x = 0; x < width; x++) {
-            for(int y = 0; y < height; y++) {
+            for (int y = 0; y < height; y++) {
                 Space space = new Space(this, x, y);
                 spaces[x][y] = space;
             }
@@ -81,30 +81,30 @@ public class Board extends Subject {
         // the below methods that pertain to a new board must only be called in newGame() method
     }
 
-    public void setConveyorBelt(){
-        ConveyorBelt belt1= new ConveyorBelt();
+    public void setConveyorBelt() {
+        ConveyorBelt belt1 = new ConveyorBelt();
         belt1.setHeading(Heading.SOUTH);
         belt1.setColor(Color.BLUE);
         spaces[7][1].addAction(belt1);
-        ConveyorBelt belt2= new ConveyorBelt();
+        ConveyorBelt belt2 = new ConveyorBelt();
         belt2.setHeading(Heading.EAST);
         belt2.setColor(Color.GREEN);
         spaces[2][1].addAction(belt2);
-        ConveyorBelt belt3= new ConveyorBelt();
+        ConveyorBelt belt3 = new ConveyorBelt();
         belt3.setHeading(Heading.NORTH);
         belt3.setColor(Color.GREEN);
         spaces[3][5].addAction(belt3);
-        ConveyorBelt belt4= new ConveyorBelt();
+        ConveyorBelt belt4 = new ConveyorBelt();
         belt4.setHeading(Heading.WEST);
         belt4.setColor(Color.GREEN);
         spaces[6][3].addAction(belt4);
-        ConveyorBelt belt5=new ConveyorBelt();
+        ConveyorBelt belt5 = new ConveyorBelt();
         belt5.setHeading(Heading.NORTH);
         belt5.setColor(Color.BLUE);
         spaces[2][4].addAction(belt5);
     }
 
-    public void setBoardWall(){
+    public void setBoardWall() {
 
         spaces[0][0].setWalls(Heading.NORTH);
         spaces[1][0].setWalls(Heading.NORTH);
@@ -144,7 +144,7 @@ public class Board extends Subject {
 
     }
 
-    public void setObstcle(){
+    public void setObstcle() {
         spaces[2][2].setWalls(Heading.WEST);
         spaces[5][3].setWalls(Heading.NORTH);
         spaces[2][4].setWalls(Heading.EAST);
@@ -152,7 +152,7 @@ public class Board extends Subject {
     }
 
     public void setCheckpoint(int x, int y) {
-        CheckPoint cp1 = new CheckPoint(x,y);
+        CheckPoint cp1 = new CheckPoint(x, y);
         spaces[x][y].setCheckPoint(cp1);
         checkPoints.add(cp1);
     }
@@ -160,10 +160,6 @@ public class Board extends Subject {
     public void sortCheckPointsInNumberOrder() {
         Comparator<CheckPoint> c = Comparator.comparingInt(CheckPoint::getCheckpointNumber);
         checkPoints.sort(c);
-    }
-
-    public Board(int width, int height) {
-        this(width, height, "defaultboard");
     }
 
     public Integer getGameId() {
@@ -266,7 +262,7 @@ public class Board extends Subject {
      * (no walls or obstacles in either of the involved spaces); otherwise,
      * null will be returned.
      *
-     * @param space the space for which the neighbour should be computed
+     * @param space   the space for which the neighbour should be computed
      * @param heading the heading of the neighbour
      * @return the space in the given direction; null if there is no (reachable) neighbour
      */
@@ -293,7 +289,7 @@ public class Board extends Subject {
         }
 
         //return getSpace(x, y);
-        Heading reverse = Heading.values()[(heading.ordinal() + 2)% Heading.values().length];
+        Heading reverse = Heading.values()[(heading.ordinal() + 2) % Heading.values().length];
         Space result = getSpace(x, y);
         if (result != null) {
             if (result.getWalls().contains(reverse)) {
@@ -315,7 +311,7 @@ public class Board extends Subject {
                 ", CheckPoints collected: " + checkpoint;
     }
 
-    public PriorityAntenna getAntenna(){
+    public PriorityAntenna getAntenna() {
         return antenna;
     }
 
@@ -352,23 +348,22 @@ public class Board extends Subject {
                     if (o1.getSpace().x < o2.getSpace().x)
                         return -1;
                     else return 1;
-                }
-                else if (antenna.getPriorityAntenna_heading() == Heading.EAST) {
+                } else if (antenna.getPriorityAntenna_heading() == Heading.EAST) {
                     // if antenna faces east, it is on the left edge, and sweeps clockwise from up to down
                     if (o1.getSpace().y < o2.getSpace().y)
                         return -1;
-                    else return 1;                    }
-                else if (antenna.getPriorityAntenna_heading() == Heading.SOUTH) {
+                    else return 1;
+                } else if (antenna.getPriorityAntenna_heading() == Heading.SOUTH) {
                     // if antenna faces south, it is on the top edge, and sweeps clockwise from right to left
                     if (o1.getSpace().x > o2.getSpace().x)
                         return -1;
-                    else return 1;                    }
-                else if (antenna.getPriorityAntenna_heading() == Heading.WEST) {
+                    else return 1;
+                } else if (antenna.getPriorityAntenna_heading() == Heading.WEST) {
                     // if antenna faces west, it is on the right edge, and sweeps clockwise from down to up
                     if (o1.getSpace().y > o2.getSpace().y)
                         return -1;
-                    else return 1;                    }
-                else return 0; // this should technically not be possible
+                    else return 1;
+                } else return 0; // this should technically not be possible
             }
         };
         players.sort(c);
@@ -376,5 +371,21 @@ public class Board extends Subject {
 
     public List<CheckPoint> getCheckPoints() {
         return checkPoints;
+    }
+
+    public int getPlayerIndex(Player player) {
+        return players.indexOf(player);
+    }
+
+    public void sortPlayersAccordingToName() {
+        Comparator<Player> c = Comparator.comparing(Player::getName);
+        players.sort(c);
+    }
+
+    public void replacePlayerAtPositionIndex(int index, Player player) {
+        if (players.get(index) != player) {
+            players.remove(index);
+            players.add(index, player);
+        }
     }
 }
