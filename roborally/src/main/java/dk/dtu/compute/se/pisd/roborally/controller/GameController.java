@@ -61,18 +61,18 @@ public class GameController {
      *
      * @param space the space to which the current player should move
      */
-    public void moveCurrentPlayerToSpace(@NotNull Space space) {
-//        Commented out as it is not a part of the game rules
-        if (space != null && space.board == board) {
-            Player currentPlayer = board.getCurrentPlayer();
-            if (currentPlayer != null && space.getPlayer() == null) {
-                currentPlayer.setSpace(space);
-                int playerNumber = (board.getPlayerNumber(currentPlayer) + 1) % board.getPlayersNumber();
-                board.setCurrentPlayer(board.getPlayer(playerNumber));
-            }
-        }
-
-    }
+//    public void moveCurrentPlayerToSpace(@NotNull Space space) {
+////        Commented out as it is not a part of the game rules
+//        if (space != null && space.board == board) {
+//            Player currentPlayer = board.getCurrentPlayer();
+//            if (currentPlayer != null && space.getPlayer() == null) {
+//                currentPlayer.setSpace(space);
+//                int playerNumber = (board.getPlayerNumber(currentPlayer) + 1) % board.getPlayersNumber();
+//                board.setCurrentPlayer(board.getPlayer(playerNumber));
+//            }
+//        }
+//
+//    }
 
     /**
      * This methode allows the player to get some random cammand cards where players can program their robot with.
@@ -313,7 +313,6 @@ public class GameController {
      * This methode moves the player's robot 1 cell to the forwarded in the headed direction
      * @param player the player whose robots should be moved forward.
      */
-    // TODO: V2
     public void moveForward(@NotNull Player player) {
         Space space = player.getSpace();
         if (player != null && player.board == board && space != null) {
@@ -344,7 +343,6 @@ public class GameController {
      * This methode moves the player's robot 2 cell to the forwarded in the headed direction
      * @param player the player whose robots should be moved forward.
      */
-    // TODO: V2
     public void fastForward(@NotNull Player player) {
         moveForward(player);
         moveForward(player);
@@ -354,7 +352,6 @@ public class GameController {
      * This methode turns the player's robot 90 degree to the right
      * @param player the player whose robots should be turned.
      */
-    // TODO: V2
     public void turnRight(@NotNull Player player) {
         if (player != null && player.board == board) {
             player.setHeading(player.getHeading().next());
@@ -365,7 +362,6 @@ public class GameController {
      * This methode turns the player's robot 90 degree to the left
      * @param player the player whose robots should be turned.
      */
-    // TODO: V2
     public void turnLeft(@NotNull Player player) {
         if (player != null && player.board == board) {
             player.setHeading(player.getHeading().prev());
@@ -420,7 +416,6 @@ public class GameController {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             if (board.getPlayer(i).getCheckPointReached() != 0
             && board.getPlayer(i).getCheckPointReached() == CheckPoint.highestCheckPointNumber) {
-                // TODO - update the 2 lines below, display the relevant message and end the game
                 board.setPhase(Phase.INITIALISATION);
 
                 Alert a = new Alert(Alert.AlertType.NONE);

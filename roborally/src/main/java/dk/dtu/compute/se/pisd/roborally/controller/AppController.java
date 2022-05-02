@@ -82,8 +82,6 @@ public class AppController implements Observer {
 
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
-            //TODO allow choice of which board to use to start a new game
-//            Board board = new Board(8, 6, "testboard");
             Board board = LoadBoard.loadBoard(boardname);
 
             // each board has only 1 antenna, and it must be on an edge of the board
@@ -107,7 +105,6 @@ public class AppController implements Observer {
      */
     public void saveGame() {
         // use saveBoard() if only the board and not the game state is to be saved
-        // TODO - update name
         LoadBoard.saveGame(gameController.board,gameController.board.boardName);
     }
 

@@ -27,7 +27,6 @@ public class ConveyorBelt extends FieldAction {
 
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
-        // TODO needs to be implemented
         FieldAction fa = space.getActions().stream().filter((FieldAction obj)-> obj.getClass().getSimpleName().equals("ConveyorBelt")).findAny().orElse(null);
         ConveyorBelt cb= (ConveyorBelt) fa;
         if(cb != null ){
