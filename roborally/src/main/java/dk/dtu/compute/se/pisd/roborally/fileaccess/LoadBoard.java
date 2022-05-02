@@ -110,7 +110,7 @@ public class LoadBoard {
 //        String filename =
 //                classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
 
-        String filename = "src\\main\\resources\\boards\\" + name + "." + JSON_EXT;
+        String filename = "src\\main\\resources\\"+BOARDSFOLDER+"\\" + name + "." + JSON_EXT;
 
         // In simple cases, we can create a Gson object with new:
         //
@@ -269,7 +269,7 @@ public class LoadBoard {
 //        String filename =
 //                classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
 
-        String filename = "src\\main\\resources\\boards\\" + name + "." + JSON_EXT;
+        String filename = "src\\main\\resources\\"+SAVEDGAMESFOLDER+"\\" + name + "." + JSON_EXT;
 
 
         // In simple cases, we can create a Gson object with new:

@@ -52,6 +52,10 @@
           "NORTH",
           "SOUTH",
           "EAST",
+          "WEST",
+          "NORTH",
+          "SOUTH",
+          "EAST",
           "WEST"
         ],
         "actions": [],
@@ -261,7 +265,7 @@
         },
         {
           "command": "FAST_FORWARD",
-          "visible": false
+          "visible": true
         },
         {
           "command": "FAST_FORWARD",
@@ -311,8 +315,8 @@
       "playerColor": "orange",
       "checkPointTokenReached": 0,
       "x": 1,
-      "y": 1,
-      "heading": "WEST",
+      "y": 0,
+      "heading": "SOUTH",
       "program": [
         {
           "command": "OPTION_WEASEL_ROUTINE",
@@ -320,7 +324,7 @@
         },
         {
           "command": "U_TURN",
-          "visible": false
+          "visible": true
         },
         {
           "command": "SPEED_ROUTINE",
@@ -379,7 +383,7 @@
         },
         {
           "command": "U_TURN",
-          "visible": false
+          "visible": true
         },
         {
           "command": "OPTION_WEASEL_ROUTINE",
@@ -429,7 +433,7 @@
       "playerColor": "red",
       "checkPointTokenReached": 1,
       "x": 7,
-      "y": 3,
+      "y": 4,
       "heading": "SOUTH",
       "program": [
         {
@@ -438,7 +442,7 @@
         },
         {
           "command": "RIGHT",
-          "visible": false
+          "visible": true
         },
         {
           "command": "FAST_FORWARD",
@@ -484,7 +488,7 @@
       ]
     }
   ],
-  "currentPlayerIndex": 1,
+  "currentPlayerIndex": 0,
   "phase": "ACTIVATION",
-  "step": 0
+  "step": 1
 }
