@@ -21,8 +21,19 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import dk.dtu.compute.se.pisd.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The GameController is responsible for handling the all
@@ -52,14 +63,14 @@ public class GameController {
      */
     public void moveCurrentPlayerToSpace(@NotNull Space space) {
 //        Commented out as it is not a part of the game rules
-//        if (space != null && space.board == board) {
-//            Player currentPlayer = board.getCurrentPlayer();
-//            if (currentPlayer != null && space.getPlayer() == null) {
-//                currentPlayer.setSpace(space);
-//                int playerNumber = (board.getPlayerNumber(currentPlayer) + 1) % board.getPlayersNumber();
-//                board.setCurrentPlayer(board.getPlayer(playerNumber));
-//            }
-//        }
+        if (space != null && space.board == board) {
+            Player currentPlayer = board.getCurrentPlayer();
+            if (currentPlayer != null && space.getPlayer() == null) {
+                currentPlayer.setSpace(space);
+                int playerNumber = (board.getPlayerNumber(currentPlayer) + 1) % board.getPlayersNumber();
+                board.setCurrentPlayer(board.getPlayer(playerNumber));
+            }
+        }
 
     }
 
@@ -411,7 +422,14 @@ public class GameController {
             && board.getPlayer(i).getCheckPointReached() == CheckPoint.highestCheckPointNumber) {
                 // TODO - update the 2 lines below, display the relevant message and end the game
                 board.setPhase(Phase.INITIALISATION);
-                System.out.println("Player "+ (i+1) + " has won the game!");
+
+                Alert a = new Alert(Alert.AlertType.NONE);
+                a.setTitle("Player " + (i+1) + " wins!");
+                a.setContentText("Player "+ (i+1) + " has won the game!");
+                ButtonType type = new ButtonType("Ok");
+                a.getDialogPane().getButtonTypes().add(type);
+                a.show();
+
             }
         }
     }
