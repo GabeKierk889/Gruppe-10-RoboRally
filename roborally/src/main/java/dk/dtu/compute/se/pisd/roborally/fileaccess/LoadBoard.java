@@ -107,8 +107,10 @@ public class LoadBoard {
         // TODO: this is not very defensive, and will result in a NullPointerException
         //       when the folder "resources" does not exist! But, it does not need
         //       the file "simpleCards.json" to exist!
-        String filename =
-                classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
+//        String filename =
+//                classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
+
+        String filename = "src\\main\\resources\\boards\\" + name + "." + JSON_EXT;
 
         // In simple cases, we can create a Gson object with new:
         //
@@ -264,8 +266,11 @@ public class LoadBoard {
         // TODO: this is not very defensive, and will result in a NullPointerException
         //       when the folder "resources" does not exist! But, it does not need
         //       the file "simpleCards.json" to exist!
-        String filename =
-                classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
+//        String filename =
+//                classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
+
+        String filename = "src\\main\\resources\\boards\\" + name + "." + JSON_EXT;
+
 
         // In simple cases, we can create a Gson object with new:
         //
