@@ -84,23 +84,23 @@ public class Board extends Subject {
     public void setConveyorBelt() {
         ConveyorBelt belt1 = new ConveyorBelt();
         belt1.setHeading(Heading.SOUTH);
-        belt1.setColor(Color.BLUE);
+        belt1.setColor("BLUE");
         spaces[7][1].addAction(belt1);
         ConveyorBelt belt2 = new ConveyorBelt();
         belt2.setHeading(Heading.EAST);
-        belt2.setColor(Color.GREEN);
+        belt2.setColor("GREEN");
         spaces[2][1].addAction(belt2);
         ConveyorBelt belt3 = new ConveyorBelt();
         belt3.setHeading(Heading.NORTH);
-        belt3.setColor(Color.GREEN);
+        belt3.setColor("GREEN");
         spaces[3][5].addAction(belt3);
         ConveyorBelt belt4 = new ConveyorBelt();
         belt4.setHeading(Heading.WEST);
-        belt4.setColor(Color.GREEN);
+        belt4.setColor("GREEN");
         spaces[6][3].addAction(belt4);
         ConveyorBelt belt5 = new ConveyorBelt();
         belt5.setHeading(Heading.NORTH);
-        belt5.setColor(Color.BLUE);
+        belt5.setColor("BLUE");
         spaces[2][4].addAction(belt5);
     }
 
