@@ -72,6 +72,7 @@ public class LoadBoard {
 			BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
 			result = new Board(template.width, template.height, template.boardName);
             result.setPriorityAntenna(template.antenna.x, template.antenna.y,template.antenna.heading);
+            CheckPoint.setHighestCheckPointNumber(0);
             for (CheckPointTemplate checkPointTemplate: template.checkPoints) {
                 if (result.getSpace(checkPointTemplate.x, checkPointTemplate.y) != null)
                     result.setCheckpoint(checkPointTemplate.x, checkPointTemplate.y);
@@ -177,6 +178,7 @@ public class LoadBoard {
             reader.close();
             result = new Board(template.board.width, template.board.height, template.board.boardName);
             result.setPriorityAntenna(template.board.antenna.x, template.board.antenna.y,template.board.antenna.heading);
+            CheckPoint.setHighestCheckPointNumber(0);
             for (CheckPointTemplate checkPointTemplate: template.board.checkPoints) {
                 if (result.getSpace(checkPointTemplate.x, checkPointTemplate.y) != null)
                     result.setCheckpoint(checkPointTemplate.x, checkPointTemplate.y);
