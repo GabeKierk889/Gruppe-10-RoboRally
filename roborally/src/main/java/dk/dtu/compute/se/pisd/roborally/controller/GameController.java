@@ -61,8 +61,8 @@ public class GameController {
      *
      * @param space the space to which the current player should move
      */
-//    public void moveCurrentPlayerToSpace(@NotNull Space space) {
-////        Commented out as it is not a part of the game rules
+    public void moveCurrentPlayerToSpace(@NotNull Space space) {
+//        Commented out as it is not a part of the game rules
 //        if (space != null && space.board == board) {
 //            Player currentPlayer = board.getCurrentPlayer();
 //            if (currentPlayer != null && space.getPlayer() == null) {
@@ -71,8 +71,8 @@ public class GameController {
 //                board.setCurrentPlayer(board.getPlayer(playerNumber));
 //            }
 //        }
-//
-//    }
+
+    }
 
     /**
      * This methode allows the player to get some random cammand cards where players can program their robot with.
