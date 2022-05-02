@@ -87,12 +87,7 @@ public class AppController implements Observer {
             Board board = LoadBoard.loadBoard(boardname);
 
             // each board has only 1 antenna, and it must be on an edge of the board
-            board.setPriorityAntenna(0, 4, Heading.EAST);
-            board.setBoardWall();
-            board.setObstcle();
-            board.setConveyorBelt();
-            board.setCheckpoint(7, 5);
-            board.setCheckpoint(0, 0);
+
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
