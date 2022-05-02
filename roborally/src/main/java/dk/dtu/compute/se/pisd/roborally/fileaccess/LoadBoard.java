@@ -152,7 +152,7 @@ public class LoadBoard {
         }
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
+        InputStream inputStream = classLoader.getResourceAsStream(SAVEDGAMESFOLDER + "/" + boardname + "." + JSON_EXT);
         if (inputStream == null) {
             return null;
         }

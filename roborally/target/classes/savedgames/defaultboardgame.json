@@ -56,6 +56,10 @@
           "NORTH",
           "SOUTH",
           "EAST",
+          "WEST",
+          "NORTH",
+          "SOUTH",
+          "EAST",
           "WEST"
         ],
         "actions": [],
@@ -248,7 +252,7 @@
         "y": 7
       }
     ],
-    "boardName": "name"
+    "boardName": "defaultboardgame"
   },
   "players": [
     {
