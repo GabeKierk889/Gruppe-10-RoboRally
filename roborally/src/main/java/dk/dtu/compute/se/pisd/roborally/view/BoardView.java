@@ -146,13 +146,19 @@ public class BoardView extends VBox implements ViewObserver {
         spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
     }
     private void drawCheckPoint(Space space, SpaceView spaceView){
-        if(space.getCheckPoint() != null){
-            String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "checkpoint.png";
-            spaceView.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+        if (space.getCheckPoint() != null) {
+            if(space.getCheckPoint().getCheckpointNumber()
+                    == 1){
+                String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "checkpoint1.png";
+                spaceView.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+            }
+            if(space.getCheckPoint().getCheckpointNumber()
+                    == 2){
+                String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "checkpoint2.png";
+                spaceView.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+            }
         }
     }
-
-
 
     @Override
     public void updateView(Subject subject) {
