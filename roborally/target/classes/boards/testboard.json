@@ -104,22 +104,7 @@
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
             "heading": "EAST",
-            "color": {
-              "red": 0.0,
-              "green": 0.5019608,
-              "blue": 0.0,
-              "opacity": 1.0,
-              "platformPaint": {
-                "argb": -16744448,
-                "r": 0.0,
-                "g": 0.5019608,
-                "b": 0.0,
-                "a": 1.0,
-                "type": "COLOR",
-                "proportional": false,
-                "isMutable": false
-              }
-            }
+            "color": "GREEN"
           }
         }
       ],
@@ -143,12 +128,7 @@
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
             "heading": "NORTH",
-            "color": {
-              "red": 0.0,
-              "green": 0.0,
-              "blue": 1.0,
-              "opacity": 1.0
-            }
+            "color": "BLUE"
           }
         }
       ],
@@ -180,22 +160,7 @@
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
             "heading": "NORTH",
-            "color": {
-              "red": 0.0,
-              "green": 0.5019608,
-              "blue": 0.0,
-              "opacity": 1.0,
-              "platformPaint": {
-                "argb": -16744448,
-                "r": 0.0,
-                "g": 0.5019608,
-                "b": 0.0,
-                "a": 1.0,
-                "type": "COLOR",
-                "proportional": false,
-                "isMutable": false
-              }
-            }
+            "color": "GREEN"
           }
         }
       ],
@@ -265,22 +230,7 @@
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
             "heading": "WEST",
-            "color": {
-              "red": 0.0,
-              "green": 0.5019608,
-              "blue": 0.0,
-              "opacity": 1.0,
-              "platformPaint": {
-                "argb": -16744448,
-                "r": 0.0,
-                "g": 0.5019608,
-                "b": 0.0,
-                "a": 1.0,
-                "type": "COLOR",
-                "proportional": false,
-                "isMutable": false
-              }
-            }
+            "color": "GREEN"
           }
         }
       ],
@@ -313,12 +263,7 @@
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
             "heading": "SOUTH",
-            "color": {
-              "red": 0.0,
-              "green": 0.0,
-              "blue": 1.0,
-              "opacity": 1.0
-            }
+            "color": "BLUE"
           }
         }
       ],
@@ -358,5 +303,6 @@
       "x": 7,
       "y": 5
     }
-  ], "boardName": "testboard"
+  ],
+  "boardName": "testboard"
 }

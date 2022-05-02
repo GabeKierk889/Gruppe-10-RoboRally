@@ -59,6 +59,10 @@
           "SOUTH",
           "EAST",
           "WEST",
+          "NORTH",
+          "SOUTH",
+          "EAST",
+          "WEST",
           "WEST"
         ],
         "actions": [],
@@ -321,6 +325,7 @@
           "visible": true
         },
         {
+          "command": "BACKWARD",
           "visible": true
         },
         {
@@ -335,6 +340,25 @@
       ],
       "cards": [
         {
+          "command": "OPTION_SANDBOX_ROUTINE",
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "FAST_FORWARD",
+          "visible": true
+        },
+        {
+          "command": "RIGHT",
           "visible": true
         },
         {
@@ -342,27 +366,7 @@
           "visible": true
         },
         {
-          "command": "OPTION_SANDBOX_ROUTINE",
-          "visible": true
-        },
-        {
-          "command": "OPTION_SANDBOX_ROUTINE",
-          "visible": true
-        },
-        {
-          "command": "FAST_FORWARD",
-          "visible": true
-        },
-        {
-          "command": "OPTION_LEFT_RIGHT",
-          "visible": true
-        },
-        {
-          "command": "FAST_FORWARD",
-          "visible": true
-        },
-        {
-          "command": "BACKWARD",
+          "command": "LEFT",
           "visible": true
         }
       ]
@@ -393,11 +397,70 @@
       ],
       "cards": [
         {
+          "command": "RIGHT",
+          "visible": true
+        },
+        {
           "command": "U_TURN",
           "visible": true
         },
         {
+          "command": "FORWARD",
+          "visible": true
+        },
+        {
           "command": "OPTION_SANDBOX_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "OPTION_WEASEL_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "BACKWARD",
+          "visible": true
+        },
+        {
+          "command": "FORWARD",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "playerName": "Player 3",
+      "playerColor": "blue",
+      "checkPointTokenReached": 0,
+      "x": 2,
+      "y": 2,
+      "heading": "SOUTH",
+      "program": [
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        }
+      ],
+      "cards": [
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "U_TURN",
           "visible": true
         },
         {
@@ -409,11 +472,129 @@
           "visible": true
         },
         {
+          "command": "OPTION_SANDBOX_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "OPTION_LEFT_RIGHT",
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "playerName": "Player 4",
+      "playerColor": "orange",
+      "checkPointTokenReached": 0,
+      "x": 3,
+      "y": 3,
+      "heading": "SOUTH",
+      "program": [
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        }
+      ],
+      "cards": [
+        {
+          "command": "BACKWARD",
+          "visible": true
+        },
+        {
+          "command": "OPTION_WEASEL_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "U_TURN",
+          "visible": true
+        },
+        {
           "command": "FORWARD",
           "visible": true
         },
         {
           "command": "BACKWARD",
+          "visible": true
+        },
+        {
+          "command": "RIGHT",
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "U_TURN",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "playerName": "Player 5",
+      "playerColor": "grey",
+      "checkPointTokenReached": 0,
+      "x": 4,
+      "y": 4,
+      "heading": "SOUTH",
+      "program": [
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        }
+      ],
+      "cards": [
+        {
+          "command": "OPTION_LEFT_RIGHT",
+          "visible": true
+        },
+        {
+          "command": "BACKWARD",
+          "visible": true
+        },
+        {
+          "command": "OPTION_WEASEL_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "LEFT",
+          "visible": true
+        },
+        {
+          "command": "OPTION_WEASEL_ROUTINE",
           "visible": true
         },
         {
