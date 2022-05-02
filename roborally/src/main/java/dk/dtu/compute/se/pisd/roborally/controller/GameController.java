@@ -415,7 +415,7 @@ public class GameController {
         // if a player has collected the last token, they have won
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             if (board.getPlayer(i).getCheckPointReached() != 0
-            && board.getPlayer(i).getCheckPointReached() == CheckPoint.highestCheckPointNumber) {
+            && board.getPlayer(i).getCheckPointReached() == CheckPoint.getHighestCheckPointNumber()) {
                 board.setPhase(Phase.INITIALISATION);
 
                 Alert a = new Alert(Alert.AlertType.NONE);

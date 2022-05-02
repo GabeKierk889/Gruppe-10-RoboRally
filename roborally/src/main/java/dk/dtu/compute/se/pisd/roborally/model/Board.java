@@ -152,7 +152,8 @@ public class Board extends Subject {
     }
 
     public void setCheckpoint(int x, int y) {
-        CheckPoint cp1 = new CheckPoint(x, y);
+        int highestCheckpoint = CheckPoint.getHighestCheckPointNumber();
+        CheckPoint cp1 = new CheckPoint(x, y, highestCheckpoint + 1);
         spaces[x][y].setCheckPoint(cp1);
         checkPoints.add(cp1);
     }

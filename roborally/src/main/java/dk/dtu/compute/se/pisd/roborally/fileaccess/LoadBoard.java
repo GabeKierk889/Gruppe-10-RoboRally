@@ -131,6 +131,11 @@ public class LoadBoard {
             writer = gson.newJsonWriter(fileWriter);
             gson.toJson(template, template.getClass(), writer);
             writer.close();
+            filename = "target\\classes\\"+BOARDSFOLDER+"\\" + name + "." + JSON_EXT;
+            fileWriter = new FileWriter(filename);
+            writer = gson.newJsonWriter(fileWriter);
+            gson.toJson(template, template.getClass(), writer);
+            writer.close();
         } catch (IOException e1) {
             if (writer != null) {
                 try {
