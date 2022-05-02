@@ -43,7 +43,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "WEST"
+            "heading": "WEST",
+            "color": "GREEN"
           }
         }
       ],
@@ -58,7 +59,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "NORTH"
+            "heading": "NORTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -71,7 +73,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "NORTH"
+            "heading": "NORTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -84,7 +87,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "NORTH"
+            "heading": "NORTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -97,7 +101,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "NORTH"
+            "heading": "NORTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -110,7 +115,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "NORTH"
+            "heading": "NORTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -123,7 +129,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "NORTH"
+            "heading": "NORTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -138,7 +145,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "EAST"
+            "heading": "EAST",
+            "color": "GREEN"
           }
         }
       ],
@@ -153,7 +161,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "SOUTH"
+            "heading": "SOUTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -168,7 +177,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "WEST"
+            "heading": "WEST",
+            "color": "GREEN"
           }
         }
       ],
@@ -183,7 +193,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "NORTH"
+            "heading": "NORTH",
+            "color": "GREEN"
           }
         }
       ],
@@ -198,7 +209,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "EAST"
+            "heading": "EAST",
+            "color": "GREEN"
           }
         }
       ],
@@ -213,7 +225,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
-            "heading": "SOUTH"
+            "heading": "SOUTH",
+            "color": "GREEN"
           }
         }
       ],
