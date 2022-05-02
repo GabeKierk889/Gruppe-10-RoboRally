@@ -29,4 +29,8 @@ public class CheckPoint {
     public static int getHighestCheckPointNumber() {
         return highestCheckPointNumber;
     }
+
+    public static void setHighestCheckPointNumber(int highestCheckPointNumber) {
+        CheckPoint.highestCheckPointNumber = highestCheckPointNumber;
+    }
 }

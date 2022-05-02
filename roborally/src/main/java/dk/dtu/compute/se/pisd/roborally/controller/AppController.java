@@ -26,6 +26,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.CheckPoint;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import javafx.application.Platform;
@@ -79,6 +80,7 @@ public class AppController implements Observer {
                     return;
                 }
             }
+            CheckPoint.setHighestCheckPointNumber(0);
 
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
@@ -161,7 +163,6 @@ public class AppController implements Observer {
      */
     public boolean stopGame() {
         if (gameController != null) {
-
             // here we save the game (without asking the user).
             //saveGame();
 
