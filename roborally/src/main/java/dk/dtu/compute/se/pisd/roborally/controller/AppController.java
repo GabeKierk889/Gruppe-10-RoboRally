@@ -80,7 +80,6 @@ public class AppController implements Observer {
                     return;
                 }
             }
-            CheckPoint.setHighestCheckPointNumber(0);
 
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
