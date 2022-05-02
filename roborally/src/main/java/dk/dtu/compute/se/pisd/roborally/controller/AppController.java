@@ -47,7 +47,8 @@ import java.util.*;
 public class AppController implements Observer {
 
     final private List<Integer> PLAYER_NUMBER_OPTIONS = Arrays.asList(2, 3, 4, 5, 6);
-    final private List<String> BOARD_OPTIONS = Arrays.asList("board1","board2");
+    final private List<String> BOARD_OPTIONS = Arrays.asList("defaultboard","testboard");
+    private String boardname;
 
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
 
@@ -73,6 +74,10 @@ public class AppController implements Observer {
         gameBoard.setHeaderText("Select a game board");
         Optional<String> gameBoardResult = gameBoard.showAndWait();
 
+        if (gameBoardResult.isPresent()) {
+            boardname = gameBoardResult.get();
+        }
+
         if (result.isPresent()) {
             if (gameController != null) {
                 // The UI should not allow this, but in case this happens anyway.
@@ -85,7 +90,9 @@ public class AppController implements Observer {
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
             //TODO allow choice of which board to use to start a new game
-            Board board = new Board(8, 6, "testboard");
+//            Board board = new Board(8, 6, "testboard");
+            Board board = LoadBoard.loadBoard(boardname);
+
             // each board has only 1 antenna, and it must be on an edge of the board
             board.setPriorityAntenna(0, 4, Heading.EAST);
             board.setBoardWall();
