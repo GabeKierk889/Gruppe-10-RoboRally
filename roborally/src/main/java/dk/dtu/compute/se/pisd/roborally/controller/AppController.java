@@ -106,7 +106,7 @@ public class AppController implements Observer {
     public void saveGame() {
         // use saveBoard() if only the board and not the game state is to be saved
         // TODO - update name
-        LoadBoard.saveGame(gameController.board,"defaultboard");
+        LoadBoard.saveGame(gameController.board,gameController.board.boardName);
     }
 
     /**

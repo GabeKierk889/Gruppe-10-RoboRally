@@ -28,7 +28,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "WEST"
+              "heading": "WEST",
+              "color": "GREEN"
             }
           }
         ],
@@ -37,6 +38,10 @@
       },
       {
         "walls": [
+          "NORTH",
+          "SOUTH",
+          "EAST",
+          "WEST",
           "NORTH",
           "SOUTH",
           "EAST",
@@ -78,7 +83,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "WEST"
+              "heading": "WEST",
+              "color": "GREEN"
             }
           }
         ],
@@ -93,7 +99,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "NORTH"
+              "heading": "NORTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -106,7 +113,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "NORTH"
+              "heading": "NORTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -119,7 +127,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "NORTH"
+              "heading": "NORTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -132,7 +141,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "NORTH"
+              "heading": "NORTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -145,7 +155,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "NORTH"
+              "heading": "NORTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -158,7 +169,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "NORTH"
+              "heading": "NORTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -173,7 +185,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "EAST"
+              "heading": "EAST",
+              "color": "GREEN"
             }
           }
         ],
@@ -188,7 +201,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "SOUTH"
+              "heading": "SOUTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -203,7 +217,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "WEST"
+              "heading": "WEST",
+              "color": "GREEN"
             }
           }
         ],
@@ -218,7 +233,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "NORTH"
+              "heading": "NORTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -233,7 +249,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "EAST"
+              "heading": "EAST",
+              "color": "GREEN"
             }
           }
         ],
@@ -248,7 +265,8 @@
           {
             "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
             "INSTANCE": {
-              "heading": "SOUTH"
+              "heading": "SOUTH",
+              "color": "GREEN"
             }
           }
         ],
@@ -264,7 +282,7 @@
       "playerColor": "orange",
       "checkPointTokenReached": 0,
       "x": 0,
-      "y": 0,
+      "y": 5,
       "heading": "NORTH",
       "program": [
         {
@@ -496,7 +514,7 @@
       ]
     }
   ],
-  "currentPlayerIndex": 0,
+  "currentPlayerIndex": 1,
   "phase": "ACTIVATION",
   "step": 2
 }
