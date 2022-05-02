@@ -69,14 +69,7 @@ public class AppController implements Observer {
         dialog.setHeaderText("Select number of players");
         Optional<Integer> result = dialog.showAndWait();
 
-        ChoiceDialog<String> gameBoard = new ChoiceDialog<>(BOARD_OPTIONS.get(0), BOARD_OPTIONS);
-        gameBoard.setTitle("Choose board");
-        gameBoard.setHeaderText("Select a game board");
-        Optional<String> gameBoardResult = gameBoard.showAndWait();
-
-        if (gameBoardResult.isPresent()) {
-            boardname = gameBoardResult.get();
-        }
+        gameBoardDialog();
 
         if (result.isPresent()) {
             if (gameController != null) {
@@ -129,7 +122,9 @@ public class AppController implements Observer {
     public void loadGame() {
         // TODO - make boardname dynamic in loadBoard(). currently, null will load defaultboard, otherwise it will load our custom board
         // use loadBoard if only loading a board (no game state info) - otherwise use loadGame
-        Board board = LoadBoard.loadGame("defaultboard");
+        gameBoardDialog();
+
+        Board board = LoadBoard.loadGame(boardname);
         if (board != null && board.getPlayersNumber() > 0) {
             List<Player> temp = new ArrayList<>();
             for (int i = 0; i < board.getPlayersNumber(); i++)
@@ -152,6 +147,15 @@ public class AppController implements Observer {
             gameController.startProgrammingPhase();
             roboRally.createBoardView(gameController);
         }
+    }
+
+    private void gameBoardDialog() {
+        ChoiceDialog<String> gameBoard = new ChoiceDialog<>(BOARD_OPTIONS.get(0), BOARD_OPTIONS);
+        gameBoard.setTitle("Choose board");
+        gameBoard.setHeaderText("Select a game board");
+        Optional<String> gameBoardResult = gameBoard.showAndWait();
+
+        gameBoardResult.ifPresent(s -> boardname = s);
     }
 
     /**
@@ -205,7 +209,6 @@ public class AppController implements Observer {
     public boolean isGameRunning() {
         return gameController != null;
     }
-
 
     @Override
     public void update(Subject subject) {
