@@ -8,12 +8,12 @@ import org.jetbrains.annotations.NotNull;
 public class ConveyorBelt extends FieldAction {
 
     private Heading heading;
-    private Color color;
-    public void setColor(Color color){
+    private String color;
+    public void setColor(String color){
         this.color=color;
     }
 
-    public Color getColor(){
+    public String getColor(){
         return color;
     }
 
@@ -33,7 +33,7 @@ public class ConveyorBelt extends FieldAction {
         if(cb != null ){
             try {
                 Space target= gameController.board.getNeighbour(space, cb.getHeading());
-                if(cb.getColor()==Color.BLUE){
+                if(cb.getColor().equals("BLUE")){
                     target=gameController.board.getNeighbour(target, cb.getHeading());
                 }
                 gameController.moveToSpace(space.getPlayer(), target, cb.getHeading());

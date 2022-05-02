@@ -25,6 +25,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
+import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -77,6 +78,7 @@ public class BoardView extends VBox implements ViewObserver {
                 spaces[x][y] = spaceView;
                 drawObstacle(space, spaces[x][y]);
                 drawConveyorBelt(space, spaces[x][y]);
+                drawCheckPoint(space, spaces[x][y]);
                 mainBoardPane.add(spaceView, x, y);
                 spaceView.setOnMouseClicked(spaceEventHandler);
             }
@@ -91,7 +93,7 @@ public class BoardView extends VBox implements ViewObserver {
         if(cb != null){
             String imgURL, repeat,size, position, beltColor;
             String path= this.getClass().getResource("../../../../../../../image/").toString();
-            if (cb.getColor() == Color.BLUE) {
+            if (cb.getColor().equals("BLUE")) {
                 repeat="repeat-x";
                 size="32 32";
                 position="left center";
@@ -143,6 +145,14 @@ public class BoardView extends VBox implements ViewObserver {
         String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "antenna.png";
         spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
     }
+    private void drawCheckPoint(Space space, SpaceView spaceView){
+        if(space.getCheckPoint() != null){
+            String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "checkpoint.png";
+            spaceView.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+        }
+    }
+
+
 
     @Override
     public void updateView(Subject subject) {
