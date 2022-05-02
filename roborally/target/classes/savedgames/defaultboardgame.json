@@ -259,7 +259,7 @@
       "playerName": "Player 2",
       "playerColor": "green",
       "checkPointTokenReached": 0,
-      "x": 0,
+      "x": 2,
       "y": 7,
       "heading": "EAST",
       "program": [
@@ -320,7 +320,7 @@
       "checkPointTokenReached": 0,
       "x": 1,
       "y": 0,
-      "heading": "SOUTH",
+      "heading": "NORTH",
       "program": [
         {
           "command": "OPTION_WEASEL_ROUTINE",
@@ -379,7 +379,7 @@
       "checkPointTokenReached": 0,
       "x": 3,
       "y": 2,
-      "heading": "EAST",
+      "heading": "WEST",
       "program": [
         {
           "command": "BACKWARD",
@@ -492,7 +492,7 @@
       ]
     }
   ],
-  "currentPlayerIndex": 0,
+  "currentPlayerIndex": 3,
   "phase": "ACTIVATION",
   "step": 1
 }
