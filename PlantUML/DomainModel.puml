@@ -2,12 +2,14 @@
 'https://plantuml.com/class-diagram
 
 object RoboRally_Game {
-    Timer
 }
 
 object Player {
-    EnergyCube
     CheckPointToken
+}
+
+object Player_Mat {
+
 }
 
 object Register {
@@ -15,11 +17,12 @@ object Register {
 }
 
 object Robot {
-    Laser
+
 }
 
 object Board {
     RacingCourse
+    Phase (programming or activasion)
 }
 
 object Programming_Card {
@@ -27,18 +30,6 @@ object Programming_Card {
 }
 
 object Special_Programming_Card {
-
-}
-
-object Damage_Card {
-
-}
-
-object Upgrade_Card {
-
-}
-
-object Upgrade_Shop {
 
 }
 
@@ -50,39 +41,16 @@ abstract Card {
 
 }
 
-object UpgradePhase {
-
-}
-
-object ProgrammingPhase {
-
-}
-
-object ActivationPhase {
-
-}
-
-object GameRound {
-}
-
-RoboRally_Game"1" -- "2..6"Player : plays
-RoboRally_Game"1" *-R- "*"GameRound
-GameRound"1" -R- "1"UpgradePhase : has
-GameRound"1" -R- "1"ProgrammingPhase : has
-GameRound"1" -R- "1"ActivationPhase : has
-UpgradePhase <. ProgrammingPhase
-ProgrammingPhase <. ActivationPhase
 RoboRally_Game"1"-- "1"Board : has
-Board"1" *-- "1..*"Space : has
-Space"1" - "0..1"Robot : has
+Board"1" *--- "1..*"Space : has
+Space"1" ---- "0..1"Robot : has
 Player"1" -L- "1"Robot : has
-UpgradePhase"1" -- "1"Upgrade_Card : has
-UpgradePhase"1" -- "1"Upgrade_Shop : has
-Player"1" -- "5"Register : has
-RoboRally_Game"1" --- "1..*"Card : has
+Board"1" --- "1..*"Card : has
 Card <|--- Programming_Card
-Card <|--- Damage_Card
 Card <|--- Special_Programming_Card
 Card"0..1" -- "1"Register : has
+Player_Mat"1" - "1"Board : has
+Player_Mat"1" -- "5"Register : has
+RoboRally_Game"1" -- "2..6"Player : plays
 
 @enduml
