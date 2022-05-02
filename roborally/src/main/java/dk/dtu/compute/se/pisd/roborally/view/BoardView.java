@@ -147,9 +147,12 @@ public class BoardView extends VBox implements ViewObserver {
     }
     private void drawCheckPoint(Space space, SpaceView spaceView){
         if(space.getCheckPoint() != null){
-            String   path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint1.png";
-            if(space.getCheckPoint().getCheckpointNumber()== 2) {
-                path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint2.png";
+            String path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint1.png";
+            int checkPointNumber = space.getCheckPoint().getCheckpointNumber();
+            switch (checkPointNumber) {
+                case 2 -> path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint2.png";
+                case 3 -> path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint3.png";
+                case 4 -> path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint4.png";
             }
             spaceView.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
         }
