@@ -78,7 +78,7 @@ public class AppController implements Observer {
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
             //TODO allow choice of which board to use to start a new game
-            Board board = new Board(8, 6, "custom");
+            Board board = new Board(8, 6, "testboard");
             // each board has only 1 antenna, and it must be on an edge of the board
             board.setPriorityAntenna(0, 4, Heading.EAST);
             board.setBoardWall();
@@ -106,7 +106,7 @@ public class AppController implements Observer {
     public void saveGame() {
         // use saveBoard() if only the board and not the game state is to be saved
         // TODO - update name
-        LoadBoard.saveGame(gameController.board,"defaultboardgame");
+        LoadBoard.saveGame(gameController.board,"defaultboard");
     }
 
     /**
@@ -115,7 +115,7 @@ public class AppController implements Observer {
     public void loadGame() {
         // TODO - make boardname dynamic in loadBoard(). currently, null will load defaultboard, otherwise it will load our custom board
         // use loadBoard if only loading a board (no game state info) - otherwise use loadGame
-        Board board = LoadBoard.loadGame("defaultboardgame");
+        Board board = LoadBoard.loadGame("defaultboard");
         if (board != null && board.getPlayersNumber() > 0) {
             List<Player> temp = new ArrayList<>();
             for (int i = 0; i < board.getPlayersNumber(); i++)
@@ -153,7 +153,7 @@ public class AppController implements Observer {
         if (gameController != null) {
 
             // here we save the game (without asking the user).
-            saveGame();
+            //saveGame();
 
             gameController = null;
             roboRally.createBoardView(null);

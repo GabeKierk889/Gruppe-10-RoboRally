@@ -256,73 +256,14 @@
         "y": 7
       }
     ],
-    "boardName": "defaultboardgame"
+    "boardName": "defaultboard"
   },
   "players": [
-    {
-      "playerName": "Player 2",
-      "playerColor": "green",
-      "checkPointTokenReached": 0,
-      "x": 2,
-      "y": 7,
-      "heading": "EAST",
-      "program": [
-        {
-          "command": "OPTION_WEASEL_ROUTINE",
-          "visible": true
-        },
-        {
-          "command": "FAST_FORWARD",
-          "visible": true
-        },
-        {
-          "command": "FAST_FORWARD",
-          "visible": false
-        },
-        {
-          "command": "OPTION_WEASEL_ROUTINE",
-          "visible": false
-        },
-        {
-          "command": "U_TURN",
-          "visible": false
-        }
-      ],
-      "cards": [
-        {
-          "visible": true
-        },
-        {
-          "visible": true
-        },
-        {
-          "visible": true
-        },
-        {
-          "visible": true
-        },
-        {
-          "visible": true
-        },
-        {
-          "command": "SPEED_ROUTINE",
-          "visible": true
-        },
-        {
-          "command": "SPEED_ROUTINE",
-          "visible": true
-        },
-        {
-          "command": "OPTION_LEFT_RIGHT",
-          "visible": true
-        }
-      ]
-    },
     {
       "playerName": "Player 4",
       "playerColor": "orange",
       "checkPointTokenReached": 0,
-      "x": 1,
+      "x": 0,
       "y": 0,
       "heading": "NORTH",
       "program": [
@@ -336,7 +277,7 @@
         },
         {
           "command": "SPEED_ROUTINE",
-          "visible": false
+          "visible": true
         },
         {
           "command": "FAST_FORWARD",
@@ -395,7 +336,7 @@
         },
         {
           "command": "OPTION_WEASEL_ROUTINE",
-          "visible": false
+          "visible": true
         },
         {
           "command": "OPTION_LEFT_RIGHT",
@@ -437,12 +378,71 @@
       ]
     },
     {
+      "playerName": "Player 2",
+      "playerColor": "green",
+      "checkPointTokenReached": 0,
+      "x": 2,
+      "y": 7,
+      "heading": "EAST",
+      "program": [
+        {
+          "command": "OPTION_WEASEL_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "FAST_FORWARD",
+          "visible": true
+        },
+        {
+          "command": "FAST_FORWARD",
+          "visible": true
+        },
+        {
+          "command": "OPTION_WEASEL_ROUTINE",
+          "visible": false
+        },
+        {
+          "command": "U_TURN",
+          "visible": false
+        }
+      ],
+      "cards": [
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "SPEED_ROUTINE",
+          "visible": true
+        },
+        {
+          "command": "OPTION_LEFT_RIGHT",
+          "visible": true
+        }
+      ]
+    },
+    {
       "playerName": "Player 1",
       "playerColor": "red",
       "checkPointTokenReached": 1,
       "x": 7,
       "y": 4,
-      "heading": "SOUTH",
+      "heading": "WEST",
       "program": [
         {
           "command": "OPTION_SANDBOX_ROUTINE",
@@ -454,7 +454,7 @@
         },
         {
           "command": "FAST_FORWARD",
-          "visible": false
+          "visible": true
         },
         {
           "command": "LEFT",
@@ -496,7 +496,7 @@
       ]
     }
   ],
-  "currentPlayerIndex": 3,
+  "currentPlayerIndex": 0,
   "phase": "ACTIVATION",
-  "step": 1
+  "step": 2
 }
