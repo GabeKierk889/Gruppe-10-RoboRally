@@ -48,7 +48,7 @@ import java.util.*;
 public class AppController implements Observer {
 
     final private List<Integer> PLAYER_NUMBER_OPTIONS = Arrays.asList(2, 3, 4, 5, 6);
-    final private List<String> BOARD_OPTIONS = Arrays.asList("defaultboard","testboard");
+    final private List<String> BOARD_OPTIONS = Arrays.asList("EasyIntro","ConveyorBeltMayhem","CheckpointChallenge");
     private String boardname;
 
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
@@ -113,7 +113,6 @@ public class AppController implements Observer {
      * this methode should provide the player to load the game
      */
     public void loadGame() {
-        // TODO - make boardname dynamic in loadBoard(). currently, null will load defaultboard, otherwise it will load our custom board
         // use loadBoard if only loading a board (no game state info) - otherwise use loadGame
         gameBoardDialog();
 

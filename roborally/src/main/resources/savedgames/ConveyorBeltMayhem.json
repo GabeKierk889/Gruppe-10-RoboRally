@@ -41,6 +41,10 @@
           "NORTH",
           "SOUTH",
           "EAST",
+          "WEST",
+          "NORTH",
+          "SOUTH",
+          "EAST",
           "WEST"
         ],
         "actions": [],
@@ -246,7 +250,7 @@
         "y": 7
       }
     ],
-    "boardName": "defaultboard"
+    "boardName": "ConveyorBeltMayhem"
   },
   "players": [
     {
