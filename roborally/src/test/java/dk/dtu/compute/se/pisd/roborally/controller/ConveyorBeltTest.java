@@ -35,8 +35,8 @@ class ConveyorBeltTest {
         belt.setColor("GREEN");
         board.getSpace(2,1).addAction((FieldAction) belt);
         Player current = board.getPlayer(1);
-        current.setHeading(Heading.EAST);
-        gameController.moveForward(current);
+        gameController.executeNextStep();
+
 
         Assertions.assertEquals( null, board.getSpace(2, 1).getPlayer(),"Space (2,1) should be empty!\"");
         Assertions.assertEquals(current.getSpace(), board.getSpace(3,1), "Players in both space should be same\"");

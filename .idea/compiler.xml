@@ -9,5 +9,8 @@
         <module name="Gruppe-10-RoboRally" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Gruppe-10-RoboRally" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

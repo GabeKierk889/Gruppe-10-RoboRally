@@ -58,6 +58,10 @@
         "SOUTH",
         "EAST",
         "WEST",
+        "NORTH",
+        "SOUTH",
+        "EAST",
+        "WEST",
         "WEST"
       ],
       "actions": [],
@@ -80,6 +84,19 @@
       "actions": [],
       "x": 1,
       "y": 0
+    },
+    {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.Gear",
+          "INSTANCE": {
+            "heading": "EAST"
+          }
+        }
+      ],
+      "x": 1,
+      "y": 3
     },
     {
       "walls": [
@@ -198,6 +215,19 @@
       "actions": [],
       "x": 5,
       "y": 0
+    },
+    {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.Gear",
+          "INSTANCE": {
+            "heading": "WEST"
+          }
+        }
+      ],
+      "x": 5,
+      "y": 1
     },
     {
       "walls": [

@@ -172,7 +172,7 @@ public class GameController {
     }
 
     // XXX: V2
-    private void executeNextStep() {
+    public void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
         if (board.getPhase() == Phase.ACTIVATION && currentPlayer != null) {
             int step = board.getStep();
@@ -216,6 +216,10 @@ public class GameController {
         } else {
             // this is the end of a register
             // board elements activate at the end of each register
+            for (int i = 0; i < board.getPlayersNumber(); i++) {
+                Space space = board.getPlayer(i).getSpace();
+                for(FieldAction action: space.getActions()){ action.doAction(this, space); }
+            }
             // at the end of a register after all board elements have activated, check if any player gets a checkpoint token
             for (int i = 0; i < board.getPlayersNumber(); i++)
                 board.getPlayer(i).getSpace().collectCheckpointToken();
@@ -325,8 +329,6 @@ public class GameController {
                 //target.setPlayer(player);
             }
         }
-        space = player.getSpace();
-        for(FieldAction action: space.getActions()){ action.doAction(this, space); }
     }
 
     public void moveBackward(@NotNull Player player) {

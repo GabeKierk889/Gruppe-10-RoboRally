@@ -1,8 +1,7 @@
 {
   "width": 8,
   "height": 8,
-  "antenna":
-  {
+  "antenna": {
     "x": 0,
     "y": 4,
     "heading": "EAST"
@@ -35,6 +34,17 @@
       ],
       "x": 0,
       "y": 0
+    },
+    {
+      "walls": [
+        "NORTH",
+        "SOUTH",
+        "EAST",
+        "WEST"
+      ],
+      "actions": [],
+      "x": 0,
+      "y": 4
     },
     {
       "walls": [
@@ -85,6 +95,12 @@
     {
       "walls": [],
       "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.Gear",
+          "INSTANCE": {
+            "heading": "EAST"
+          }
+        },
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
@@ -187,6 +203,19 @@
       "y": 4
     },
     {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.Gear",
+          "INSTANCE": {
+            "heading": "WEST"
+          }
+        }
+      ],
+      "x": 5,
+      "y": 1
+    },
+    {
       "walls": [
         "WEST"
       ],
@@ -201,6 +230,19 @@
       ],
       "x": 5,
       "y": 5
+    },
+    {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.Gear",
+          "INSTANCE": {
+            "heading": "WEST"
+          }
+        }
+      ],
+      "x": 6,
+      "y": 4
     },
     {
       "walls": [
@@ -234,5 +276,6 @@
       "x": 7,
       "y": 7
     }
-  ], "boardName": "ConveyorBeltMayhem"
+  ],
+  "boardName": "ConveyorBeltMayhem"
 }

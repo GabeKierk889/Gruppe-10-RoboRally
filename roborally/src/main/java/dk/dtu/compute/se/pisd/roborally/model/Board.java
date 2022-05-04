@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -74,9 +75,6 @@ public class Board extends Subject {
 
         this.stepMode = false;
 
-        // NOTE - Board-constructor must NOT invoke below setConveyorBelt etc. methods,
-        // as constructor is also used to load existing boards with different setups
-        // the below methods that pertain to a new board must only be called in newGame() method
     }
 
 

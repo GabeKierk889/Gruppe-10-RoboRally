@@ -22,9 +22,10 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.model.ConveyorBelt;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
+import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -76,6 +77,7 @@ public class BoardView extends VBox implements ViewObserver {
                 drawObstacle(space, spaces[x][y]);
                 drawConveyorBelt(space, spaces[x][y]);
                 drawCheckPoint(space, spaces[x][y]);
+                drawGear(space, spaces[x][y]);
                 mainBoardPane.add(spaceView, x, y);
                 spaceView.setOnMouseClicked(spaceEventHandler);
             }
@@ -155,6 +157,17 @@ public class BoardView extends VBox implements ViewObserver {
         }
     }
 
+    private void drawGear(Space space, SpaceView spaceView) {
+        Gear gear = (Gear) space.getActions().stream().filter((FieldAction fa) -> fa.getClass().getSimpleName().equals("Gear")).findAny().orElse(null);
+        if (gear != null) {
+            String path;
+            if (gear.getHeading() == Heading.EAST)
+                path = this.getClass().getResource("../../../../../../../image/").toString() + "counterclockwise.png";
+            else
+                path = this.getClass().getResource("../../../../../../../image/").toString() + "clockwise.png";
+            spaceView.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+        }
+    }
 
 
     @Override
