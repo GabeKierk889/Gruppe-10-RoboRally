@@ -209,7 +209,7 @@ public class GameController {
         }
     }
 
-    private void switchTurnAndRegister(Player currentPlayer, int step) {
+    public void switchTurnAndRegister(Player currentPlayer, int step) {
         int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
         if (nextPlayerNumber < board.getPlayersNumber()) {
             board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
