@@ -134,9 +134,9 @@ public class BoardView extends VBox implements ViewObserver {
             left=BorderStrokeStyle.SOLID;
         }
 
-        spaceView.setBorder(new Border(new BorderStroke(Color.RED, Color.RED, Color.RED, Color.RED,
+        spaceView.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
                 top, right, down, left,
-                CornerRadii.EMPTY, new BorderWidths(3), Insets.EMPTY)));
+                CornerRadii.EMPTY, new BorderWidths(7), Insets.EMPTY)));
     }
     private void drawAntena(){
         int x= board.getAntenna().getPriorityAntenna_xcoord();
