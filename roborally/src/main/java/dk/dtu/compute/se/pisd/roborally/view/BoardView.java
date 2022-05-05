@@ -112,7 +112,7 @@ public class BoardView extends VBox implements ViewObserver {
 
             String bgColor= "black";
             if((space.x + space.y) % 2 == 0){ bgColor= "white";}
-            spaceView.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-color: "+bgColor+";-fx-background-repeat: "+repeat+"; -fx-background-size: "+size+"; -fx-background-position:"+position+";");
+            spaceView.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-color: "+bgColor+";-fx-background-repeat: "+repeat+"; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:"+position+";");
         }
     }
     private void drawObstacle(Space space, SpaceView spaceView){
@@ -142,7 +142,7 @@ public class BoardView extends VBox implements ViewObserver {
         int x= board.getAntenna().getPriorityAntenna_xcoord();
         int y= board.getAntenna().getPriorityAntenna_ycoord();
         String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "antenna.png";
-        spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+        spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+" ; -fx-background-position:center center;");
     }
     private void drawCheckPoint(Space space, SpaceView spaceView){
         if(space.getCheckPoint() != null){
@@ -153,7 +153,7 @@ public class BoardView extends VBox implements ViewObserver {
                 case 3 -> path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint3.png";
                 case 4 -> path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint4.png";
             }
-            spaceView.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+            spaceView.setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
         }
     }
 
@@ -165,7 +165,7 @@ public class BoardView extends VBox implements ViewObserver {
                 path = this.getClass().getResource("../../../../../../../image/").toString() + "counterclockwise.png";
             else
                 path = this.getClass().getResource("../../../../../../../image/").toString() + "clockwise.png";
-            spaceView.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: 62 62; -fx-background-position:center center;");
+            spaceView.setStyle("-fx-background-image: url(" + path + "); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:center center;");
         }
     }
 

@@ -33,6 +33,8 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * ...
  *
@@ -59,11 +61,18 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
 
-        if ((space.x + space.y) % 2 == 0) {
-            this.setStyle("-fx-background-color: white;");
-        } else {
-            this.setStyle("-fx-background-color: black;");
-        }
+        // old code that makes the spaces black/white
+//        if ((space.x + space.y) % 2 == 0) {
+//            this.setStyle("-fx-background-color: white;");
+//        } else {
+//            this.setStyle("-fx-background-color: black;");
+//        }
+
+        // makes empty spaces look like metal plates
+        String path= Objects.requireNonNull(this.getClass().getResource("../../../../../../../image/")).toString();
+        String imgURL = path + "EmptySpace.png";
+        this.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT+";");
+
 
         // updatePlayer();
 
@@ -77,17 +86,54 @@ public class SpaceView extends StackPane implements ViewObserver {
 
         Player player = space.getPlayer();
         if (player != null) {
-            Polygon arrow = new Polygon(0.0, 0.0,
-                    10.0, 20.0,
-                    20.0, 0.0 );
-            try {
-                arrow.setFill(Color.valueOf(player.getColor()));
-            } catch (Exception e) {
-                arrow.setFill(Color.MEDIUMPURPLE);
+
+            // old code that makes arrows instead of robots
+//            Polygon arrow = new Polygon(0.0, 0.0,
+//                    10.0, 20.0,
+//                    20.0, 0.0 );
+
+            // makes the robots look like actual robots
+            String path= Objects.requireNonNull(this.getClass().getResource("../../../../../../../image/")).toString();
+            String imgURL = path + player.getColor() + "robot.png";
+            String repeat = "no-repeat";
+            StackPane stackPane = new StackPane();
+
+            String playerColor = player.getColor();
+
+            switch (playerColor) {
+                case "blue":
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    break;
+                case "red":
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    break;
+                case "green":
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    break;
+                case "orange":
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    break;
+                case "grey":
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    break;
+                case "magenta":
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    break;
             }
 
-            arrow.setRotate((90*player.getHeading().ordinal())%360);
-            this.getChildren().add(arrow);
+            // old code that colored the arrows
+//            try {
+//                arrow.setFill(Color.valueOf(player.getColor()));
+//            } catch (Exception e) {
+//                arrow.setFill(Color.MEDIUMPURPLE);
+//            }
+
+            // makes the robots rotate when they move
+            stackPane.setRotate((90*player.getHeading().ordinal())%360);
+
+            // old code that made the arrows rotate
+//            arrow.setRotate((90*player.getHeading().ordinal())%360);
+            this.getChildren().add(stackPane);
         }
     }
 
