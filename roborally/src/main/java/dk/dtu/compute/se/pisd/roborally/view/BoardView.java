@@ -35,6 +35,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * ...
  *
@@ -116,33 +118,64 @@ public class BoardView extends VBox implements ViewObserver {
         }
     }
     private void drawObstacle(Space space, SpaceView spaceView){
+
+        // old code that draw lines on the spaces for walls
         BorderStrokeStyle top, right, down, left;
         top= BorderStrokeStyle.NONE;
         right= BorderStrokeStyle.NONE;
         down= BorderStrokeStyle.NONE;
         left= BorderStrokeStyle.NONE;
+
+        // new code that makes the actual walls (doesn't work yet)
+//        String path= Objects.requireNonNull(this.getClass().getResource("../../../../../../../image/")).toString();
+//        StackPane stackPane = new StackPane();
+
         if(space.getWalls().contains(Heading.NORTH)){
+            // old code that draw lines on the spaces for walls
             top= BorderStrokeStyle.SOLID;
+
+            // new code that makes the actual walls (doesn't work yet)
+//            String imgURL = path + "wallnorth.png";
+//            stackPane.setStyle("-fx-background-image: url("+imgURL+");-fx-background-size: "+SpaceView.SPACE_HEIGHT+";");
         }
         if(space.getWalls().contains(Heading.SOUTH)){
+            // old code that draw lines on the spaces for walls
             down= BorderStrokeStyle.SOLID;
+
+            // new code that makes the actual walls (doesn't work yet)
+//            String imgURL = path + "wallsouth.png";
+//            stackPane.setStyle("-fx-background-image: url("+imgURL+");-fx-background-size: "+SpaceView.SPACE_HEIGHT+";");
         }
         if(space.getWalls().contains(Heading.EAST)){
+            // old code that draw lines on the spaces for walls
             right= BorderStrokeStyle.SOLID;
+
+            // new code that makes the actual walls (doesn't work yet)
+//            String imgURL = path + "walleast.png";
+//            stackPane.setStyle("-fx-background-image: url("+imgURL+");-fx-background-size: "+SpaceView.SPACE_HEIGHT+";");
         }
         if(space.getWalls().contains(Heading.WEST)){
+            // old code that draw lines on the spaces for walls
             left=BorderStrokeStyle.SOLID;
+
+            // new code that makes the actual walls (doesn't work yet)
+//            String imgURL = path + "wallwest.png";
+//            stackPane.setStyle("-fx-background-image: url("+imgURL+");-fx-background-size: "+SpaceView.SPACE_HEIGHT+";");
         }
 
-        spaceView.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
+        // old code that draw lines on the spaces for walls
+        spaceView.setBorder(new Border(new BorderStroke(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW,
                 top, right, down, left,
                 CornerRadii.EMPTY, new BorderWidths(7), Insets.EMPTY)));
+
+        // new code that makes the actual walls (doesn't work yet)
+//        spaceView.getChildren().add(stackPane);
     }
     private void drawAntena(){
         int x= board.getAntenna().getPriorityAntenna_xcoord();
         int y= board.getAntenna().getPriorityAntenna_ycoord();
         String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "antenna.png";
-        spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT+" ; -fx-background-position:center center;");
+        spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT*0.70+" ; -fx-background-position:center center;");
     }
     private void drawCheckPoint(Space space, SpaceView spaceView){
         if(space.getCheckPoint() != null){

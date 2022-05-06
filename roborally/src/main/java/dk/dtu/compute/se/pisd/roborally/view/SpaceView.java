@@ -74,7 +74,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT+";");
 
 
-        // updatePlayer();
+//         updatePlayer();
 
         // This space view should listen to changes of the space
         space.attach(this);
@@ -102,22 +102,22 @@ public class SpaceView extends StackPane implements ViewObserver {
 
             switch (playerColor) {
                 case "blue":
-                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.80+"; -fx-background-repeat: "+repeat+";");
                     break;
                 case "red":
-                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.80+"; -fx-background-repeat: "+repeat+";");
                     break;
                 case "green":
-                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.80+"; -fx-background-repeat: "+repeat+";");
                     break;
                 case "orange":
-                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.80+"; -fx-background-repeat: "+repeat+";");
                     break;
                 case "grey":
-                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.80+"; -fx-background-repeat: "+repeat+";");
                     break;
                 case "magenta":
-                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.87+"; -fx-background-repeat: "+repeat+";");
+                    stackPane.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-size: "+SPACE_HEIGHT*0.80+"; -fx-background-repeat: "+repeat+";");
                     break;
             }
 
@@ -134,6 +134,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             // old code that made the arrows rotate
 //            arrow.setRotate((90*player.getHeading().ordinal())%360);
             this.getChildren().add(stackPane);
+
         }
     }
 
