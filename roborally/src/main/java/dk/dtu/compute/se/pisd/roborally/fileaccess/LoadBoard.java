@@ -47,7 +47,7 @@ public class LoadBoard {
     private static final String DEFAULTBOARD = "defaultboard";
     private static final String JSON_EXT = "json";
 
-    public static Board loadBoard(String boardname) {
+    public static Board loadBoard(String boardname) {  // @author Xiao Chen
         if (boardname == null) {
             boardname = DEFAULTBOARD;
         }
@@ -102,6 +102,7 @@ public class LoadBoard {
 		return null;
     }
 
+    // @author Xiao Chen
     public static void saveBoard(Board board, String name) {
         BoardTemplate template = LoadBoard.createBoardTemplate(board, name);
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
@@ -152,7 +153,7 @@ public class LoadBoard {
         }
     }
 
-    public static Board loadGame(String boardname) {
+    public static Board loadGame(String boardname) { // @author Xiao Chen
         if (boardname == null) {
             boardname = DEFAULTBOARD;
         }
@@ -231,6 +232,7 @@ public class LoadBoard {
         return null;
     }
 
+    // @author Xiao Chen
     public static void saveGame(Board board, String name) {
         GameStateTemplate template = new GameStateTemplate();
         template.board = createBoardTemplate(board, name);
@@ -318,6 +320,7 @@ public class LoadBoard {
         }
     }
 
+    // @author Xiao Chen
     private static BoardTemplate createBoardTemplate(Board board, String name) {
         BoardTemplate template = new BoardTemplate();
         template.boardName = name;

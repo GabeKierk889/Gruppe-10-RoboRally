@@ -6,6 +6,7 @@ import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import java.util.ArrayList;
 import java.util.List;
 
+// @author Xiao Chen
 public class PriorityAntenna {
     private int priorityAntenna_xcoord;
     private int priorityAntenna_ycoord;

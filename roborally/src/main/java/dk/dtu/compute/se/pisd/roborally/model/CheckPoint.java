@@ -1,5 +1,6 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
+// @author Xiao Chen
 public class CheckPoint {
     private int CHECKPOINTNUMBER;
     private static int highestCheckPointNumber;

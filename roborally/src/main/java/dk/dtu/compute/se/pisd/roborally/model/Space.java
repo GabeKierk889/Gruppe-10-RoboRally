@@ -80,6 +80,7 @@ public class Space extends Subject {
         notifyChange();
     }
 
+    // @author Golbas Haidari
     public void setWalls(Heading heading){
         this.walls.add(heading);
     }
@@ -98,6 +99,7 @@ public class Space extends Subject {
         this.checkPoint = checkPoint;
     }
 
+    // @author Xiao Chen
     public void collectCheckpointToken() {
         if (player != null && checkPoint != null) {
             if ((player.getCheckPointReached() > 0 && checkPoint.getCheckpointNumber() - player.getCheckPointReached() == 1)

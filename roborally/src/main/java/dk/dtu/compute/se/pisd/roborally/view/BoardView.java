@@ -89,6 +89,7 @@ public class BoardView extends VBox implements ViewObserver {
         update(board);
     }
 
+    // @author Golbas Haidari & Mark Bidstrup
     private void drawConveyorBelt(Space space, SpaceView spaceView){
         ConveyorBelt cb = (ConveyorBelt) space.getActions().stream().filter((FieldAction fa)-> fa.getClass().getSimpleName().equals("ConveyorBelt")).findAny().orElse(null);
         if(cb != null){
@@ -117,6 +118,8 @@ public class BoardView extends VBox implements ViewObserver {
             spaceView.setStyle("-fx-background-image: url("+imgURL+"); -fx-background-color: "+bgColor+";-fx-background-repeat: "+repeat+"; -fx-background-size: "+SpaceView.SPACE_HEIGHT+"; -fx-background-position:"+position+";");
         }
     }
+
+    // @author Golbas Haidari
     private void drawObstacle(Space space, SpaceView spaceView){
 
         // old code that draw lines on the spaces for walls
@@ -171,12 +174,16 @@ public class BoardView extends VBox implements ViewObserver {
         // new code that makes the actual walls (doesn't work yet)
 //        spaceView.getChildren().add(stackPane);
     }
+
+    // @author Golbas Haidari & Mark Bidstrup
     private void drawAntena(){
         int x= board.getAntenna().getPriorityAntenna_xcoord();
         int y= board.getAntenna().getPriorityAntenna_ycoord();
         String path=  this.getClass().getResource("../../../../../../../image/").toString()+ "antenna.png";
         spaces[x][y].setStyle("-fx-background-image: url("+path+"); -fx-background-repeat: no-repeat; -fx-background-size: "+SpaceView.SPACE_HEIGHT*0.70+" ; -fx-background-position:center center;");
     }
+
+    // @author Golbas Haidari & Mark Bidstrup
     private void drawCheckPoint(Space space, SpaceView spaceView){
         if(space.getCheckPoint() != null){
             String path = this.getClass().getResource("../../../../../../../image/").toString() + "Checkpoint1.png";
@@ -190,6 +197,7 @@ public class BoardView extends VBox implements ViewObserver {
         }
     }
 
+    // @author Golbas Haidari & Mark Bidstrup
     private void drawGear(Space space, SpaceView spaceView) {
         Gear gear = (Gear) space.getActions().stream().filter((FieldAction fa) -> fa.getClass().getSimpleName().equals("Gear")).findAny().orElse(null);
         if (gear != null) {

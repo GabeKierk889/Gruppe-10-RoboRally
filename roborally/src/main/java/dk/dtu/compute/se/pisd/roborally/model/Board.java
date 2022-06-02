@@ -77,7 +77,7 @@ public class Board extends Subject {
 
     }
 
-
+    // @author Xiao Chen
     public void setCheckpoint(int x, int y) {
         int highestCheckpoint = CheckPoint.getHighestCheckPointNumber();
         CheckPoint cp1 = new CheckPoint(x, y, highestCheckpoint + 1);
@@ -85,6 +85,7 @@ public class Board extends Subject {
         checkPoints.add(cp1);
     }
 
+    // @author Xiao Chen
     public void sortCheckPointsInNumberOrder() {
         Comparator<CheckPoint> c = Comparator.comparingInt(CheckPoint::getCheckpointNumber);
         checkPoints.sort(c);
@@ -243,6 +244,7 @@ public class Board extends Subject {
         return antenna;
     }
 
+    // @author Xiao Chen
     public void setPriorityAntenna(int x, int y, Heading faces) {
         // priority antennas are always on an edge of the board
         if ((x == 0 || x == spaces.length - 1) || (y == 0 || y == spaces[0].length - 1)) {
@@ -257,12 +259,14 @@ public class Board extends Subject {
         }
     }
 
+    // @author Xiao Chen
     public int calculateDistanceToPriorityAntenna(Space space) {
         int x_distance = Math.abs(space.x - antenna.getPriorityAntenna_xcoord());
         int y_distance = Math.abs(space.y - antenna.getPriorityAntenna_ycoord());
         return x_distance + y_distance;
     }
 
+    // @author Xiao Chen
     public void sortPlayersAccordingToPriority() {
         // sort players according to distance from antenna
         Comparator<Player> c = (o1, o2) -> {
@@ -299,17 +303,19 @@ public class Board extends Subject {
 
     public List<CheckPoint> getCheckPoints() {
         return checkPoints;
-    }
+    }     // @author Xiao Chen
 
     public int getPlayerIndex(Player player) {
         return players.indexOf(player);
     }
 
+    // @author Xiao Chen
     public void sortPlayersAccordingToName() {
         Comparator<Player> c = Comparator.comparing(Player::getName);
         players.sort(c);
     }
 
+    // @author Xiao Chen
     public void replacePlayerAtPositionIndex(int index, Player player) {
         if (players.get(index) != player) {
             players.remove(index);
