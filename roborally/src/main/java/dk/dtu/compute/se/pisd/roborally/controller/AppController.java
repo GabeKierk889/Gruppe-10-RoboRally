@@ -121,10 +121,10 @@ public class AppController implements Observer {
             List<Player> temp = new ArrayList<>();
             for (int i = 0; i < board.getPlayersNumber(); i++)
                 temp.add(board.getPlayer(i));
-            board.sortPlayersAccordingToName();
+            board.sortPlayersAccordingToName(); // put the players in order 1,2,3,4 (as json saves players in order according to player-turn order)
             gameController = new GameController(board);
             roboRally.createBoardView(gameController);
-            for (int i = 0; i < temp.size(); i++)
+            for (int i = 0; i < temp.size(); i++) // following loop puts the players back in the original order (according to their turns based on priority antenna distance)
                 board.replacePlayerAtPositionIndex(i, temp.get(i));
         }
         else if (board == null) // this should not happen
