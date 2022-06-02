@@ -5,7 +5,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 import org.jetbrains.annotations.NotNull;
 
-public class Gear extends FieldAction{
+public class Gear extends FieldAction{ // @author Xiao Chen
     private Heading heading;
 
     public Heading getHeading() {

@@ -81,11 +81,8 @@ public class AppController implements Observer {
                 }
             }
 
-            // XXX the board should eventually be created programmatically or loaded from a file
-            //     here we just create an empty board with the required number of players.
+            // @author Xiao Chen
             Board board = LoadBoard.loadBoard(boardname);
-
-            // each board has only 1 antenna, and it must be on an edge of the board
 
             gameController = new GameController(board);
             int no = result.get();
@@ -112,7 +109,7 @@ public class AppController implements Observer {
     /**
      * this methode should provide the player to load the game
      */
-    public void loadGame() {
+    public void loadGame() {             // @author Xiao Chen
         // use loadBoard if only loading a board (no game state info) - otherwise use loadGame
         gameBoardDialog();
 
@@ -141,7 +138,7 @@ public class AppController implements Observer {
         }
     }
 
-    private void gameBoardDialog() {
+    private void gameBoardDialog() {             // @author Mark Bidstrup
         ChoiceDialog<String> gameBoard = new ChoiceDialog<>(BOARD_OPTIONS.get(0), BOARD_OPTIONS);
         gameBoard.setTitle("Choose board");
         gameBoard.setHeaderText("Select a game board");

@@ -118,7 +118,7 @@ public class GameController {
         board.setPhase(Phase.ACTIVATION);
         // update player priority based on distance from priority antenna
         // this line is only in case priority was not updated at the end of the last register - i.e. at start of game
-        board.sortPlayersAccordingToPriority();
+        board.sortPlayersAccordingToPriority(); // @author Xiao Chen - sorts players according to distance from priority antenna
         board.setCurrentPlayer(board.getPlayer(0));
         board.setStep(0);
     }
@@ -198,6 +198,7 @@ public class GameController {
         }
     }
 
+    // @author Xiao Chen
     public void executeCommandOptionAndContinue(Command command) {
         Player currentPlayer = board.getCurrentPlayer();
         board.setPhase(Phase.ACTIVATION);
@@ -209,6 +210,7 @@ public class GameController {
         }
     }
 
+    // @author Xiao Chen
     public void switchTurnAndRegister(Player currentPlayer, int step) {
         int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
         if (nextPlayerNumber < board.getPlayersNumber()) {
@@ -331,7 +333,7 @@ public class GameController {
         }
     }
 
-    public void moveBackward(@NotNull Player player) {
+    public void moveBackward(@NotNull Player player) { // @author Deniz Isikli
         uTurn(player);
         moveForward(player);
         uTurn(player);
@@ -341,7 +343,7 @@ public class GameController {
      * This methode moves the player's robot 2 cell to the forwarded in the headed direction
      * @param player the player whose robots should be moved forward.
      */
-    public void fastForward(@NotNull Player player) {
+    public void fastForward(@NotNull Player player) { // @author Deniz Isikli
         moveForward(player);
         moveForward(player);
     }
@@ -350,7 +352,7 @@ public class GameController {
      * This methode turns the player's robot 90 degree to the right
      * @param player the player whose robots should be turned.
      */
-    public void turnRight(@NotNull Player player) {
+    public void turnRight(@NotNull Player player) { // @author Deniz Isikli
         if (player != null && player.board == board) {
             player.setHeading(player.getHeading().next());
         }
@@ -360,27 +362,26 @@ public class GameController {
      * This methode turns the player's robot 90 degree to the left
      * @param player the player whose robots should be turned.
      */
-    public void turnLeft(@NotNull Player player) {
+    public void turnLeft(@NotNull Player player) { // @author Deniz Isikli
         if (player != null && player.board == board) {
             player.setHeading(player.getHeading().prev());
         }
     }
 
-    public void uTurn(@NotNull Player player) {
+    public void uTurn(@NotNull Player player) { // @author Deniz Isikli
         if(player != null && player.board == board) {
             turnRight(player);
             turnRight(player);
         }
     }
 
-    public void speedRoutine(Player player) {
+    public void speedRoutine(Player player) { // @author Deniz Isikli
         if(player != null && player.board == board) {
             moveForward(player);
             moveForward(player);
             moveForward(player);
         }
     }
-
 
     /**
      * This method allows moves the card between the commandCards fields
@@ -409,7 +410,7 @@ public class GameController {
         assert false;
     }
 
-    public void checkForWinner() {
+    public void checkForWinner() { // @author Mark Bidstrup
         // if a player has collected the last token, they have won
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             if (board.getPlayer(i).getCheckPointReached() != 0
